@@ -198,7 +198,7 @@ export default function Home() {
 
             <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-300">
               Computer Science Engineering fresher with experience in Java,
-              DSA, Django, and full-stack web development. Focused on clean
+              DSA, and full-stack web development. Focused on clean
               design, performance, and real-world problem solving.
             </p>
 
