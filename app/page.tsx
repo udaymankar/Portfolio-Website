@@ -84,7 +84,7 @@ const timeline = [
   {
     year: "2022–2026",
     title: "B.Tech CSE",
-    desc: "Completed B.Tech in Computer Science Engineering from RTM, Nagpur University",
+    desc: "Completed B.Tech in Computer Science Engineering from RTM, Nagpur University.",
   },
   {
     year: "2021–2022",
@@ -195,9 +195,9 @@ export default function Home() {
             </h1>
 
             <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-300">
-              Computer Science Engineering fresher with experience in Java, DSA,
-              Django, and full-stack web development. Focused on clean design,
-              performance, and real-world problem solving.
+              Computer Science Engineering fresher with experience in Java,
+              DSA, Django, and full-stack web development. Focused on clean
+              design, performance, and real-world problem solving.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
