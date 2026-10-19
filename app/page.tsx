@@ -1084,18 +1084,31 @@ export default function Home() {
           >
             UDAY KISAN MANKAR
           </p>
-          <p
-            style={{
-              fontFamily: "var(--font-sans)",
-              fontSize: "0.7rem",
-              color: "#6e6560",
-              letterSpacing: "0.06em",
-              textTransform: "uppercase",
-            }}
-          >
-            &copy; {new Date().getFullYear()} · Software Engineering · Pune,
-            India
-          </p>
+          <div className="text-center sm:text-right">
+            <p
+              style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: "0.7rem",
+                color: "#a9a19b",
+                letterSpacing: "0.06em",
+                textTransform: "uppercase",
+                lineHeight: 1.7,
+              }}
+            >
+              &copy; {new Date().getFullYear()} · The Uday Times · Software Development &amp; Quality Assurance
+            </p>
+            <p
+              style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: "0.68rem",
+                color: "#827b75",
+                letterSpacing: "0.03em",
+                marginTop: "0.25rem",
+              }}
+            >
+              Designed &amp; built by Uday Kisan Mankar · Pune, India
+            </p>
+          </div>
         </div>
       </section>
     </div>
