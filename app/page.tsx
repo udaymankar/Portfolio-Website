@@ -618,12 +618,18 @@ export default function Home() {
                   src="/Uday%20Passport%20photo%20og.png"
                   alt="Portrait of Uday Mankar"
                   className="w-full"
+                  draggable={false}
+                  onDragStart={(event) => event.preventDefault()}
+                  onContextMenu={(event) => event.preventDefault()}
                   style={{
                     display: "block",
                     aspectRatio: "4 / 3",
                     objectFit: "cover",
                     objectPosition: "center 38%",
                     border: "1px solid var(--rule)",
+                    userSelect: "none",
+                    WebkitUserDrag: "none",
+                    WebkitTouchCallout: "none",
                   }}
                 />
                 <figcaption className="meta-text mt-2">Uday Mankar · Software Testing &amp; Development</figcaption>
@@ -705,12 +711,18 @@ export default function Home() {
                 src="/Uday%20Passport%20photo%20og.png"
                 alt="Uday Mankar in a navy blue suit"
                 className="w-full"
+                draggable={false}
+                onDragStart={(event) => event.preventDefault()}
+                onContextMenu={(event) => event.preventDefault()}
                 style={{
                   display: "block",
                   aspectRatio: "4 / 5",
                   objectFit: "cover",
                   objectPosition: "center 35%",
                   border: "1px solid var(--rule)",
+                  userSelect: "none",
+                  WebkitUserDrag: "none",
+                  WebkitTouchCallout: "none",
                 }}
               />
               <figcaption className="meta-text mt-2">A little about the person behind the projects</figcaption>
