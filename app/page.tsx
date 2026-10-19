@@ -955,17 +955,25 @@ function ContactForm() {
     }
     setState("loading");
     try {
-      const res = await fetch("https://formspree.io/f/xpwzjdpn", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          name: fields.name,
-          email: fields.email,
-          subject: fields.subject || "(No subject)",
-          message: fields.message,
-        }),
-      });
-      if (res.ok) {
+      const res = await fetch(
+        "https://formsubmit.co/ajax/udaymankar9@gmail.com",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            name: fields.name,
+            email: fields.email,
+            _subject: fields.subject
+              ? `[Portfolio] ${fields.subject}`
+              : "[Portfolio] New message from contact form",
+            _replyto: fields.email,
+            message: fields.message,
+            _captcha: "false",
+          }),
+        }
+      );
+      const json = await res.json().catch(() => ({}));
+      if (res.ok && (json as { success?: string }).success === "true") {
         setState("success");
         setFields({ name: "", email: "", subject: "", message: "" });
       } else {
