@@ -34,7 +34,7 @@ const projects = [
     description:
       "A console-based banking simulation featuring secure authentication, deposits, withdrawals, fund transfers, and a complete transaction history engine.",
     tech: ["Java", "OOP", "Collections", "Serialization"],
-    github: "https://github.com/udaymankar/atm-simulation",
+    github: "https://github.com/udaymankar/Java_ATM-Simulation-System",
     featured: true,
   },
   {
@@ -42,7 +42,7 @@ const projects = [
     description:
       "A financial utility for displaying transaction data in a clean, digital passbook-style web interface.",
     tech: ["Python", "Django", "HTML", "CSS", "Bootstrap"],
-    github: "https://github.com/udaymankar/digital-passbook",
+    github: "https://github.com/udaymankar/Uday-bank-Project",
     featured: false,
   },
   {
@@ -50,7 +50,7 @@ const projects = [
     description:
       "A personal portfolio showcasing web development, interface design, and editorial presentation.",
     tech: ["Next.js", "Tailwind CSS", "Framer Motion"],
-    github: "https://github.com/udaymankar/portfolio-website",
+    github: "https://github.com/udaymankar/Portfolio-Website",
     featured: false,
   },
 ];
@@ -81,13 +81,13 @@ const skillGroups = [
 const timeline = [
   {
     year: "2026",
-    title: "Software Developer",
-    desc: "Actively seeking entry-level opportunities in software and web development.",
+    title: "Software Testing & Development",
+    desc: "Building practical projects and seeking entry-level opportunities in software quality assurance and development.",
   },
   {
     year: "2022–2026",
     title: "B.Tech, Computer Science Engineering",
-    desc: "RTM Nagpur University — studied core CS fundamentals, OOP, DSA, databases, and web technologies.",
+    desc: "Sant Gadge Baba Amravati University — studied core computer science, object-oriented programming, databases, and web technologies.",
   },
   {
     year: "2021–2022",
