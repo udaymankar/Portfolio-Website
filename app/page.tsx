@@ -426,6 +426,16 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Centered publication identity beneath the name */}
+        <div
+          className="border-t px-4 py-2.5 text-center"
+          style={{ borderColor: "var(--rule-light)" }}
+        >
+          <p className="meta-text" style={{ textTransform: "none", letterSpacing: "0.04em" }}>
+            The Uday Times · Pune, India
+          </p>
+        </div>
+
         {/* Mobile sub-bar */}
         <div
           className="md:hidden border-t px-6 py-2 flex items-center justify-between"
