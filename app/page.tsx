@@ -467,8 +467,11 @@ export default function Home() {
                   maxWidth: "700px",
                 }}
               >
-                Building Software. Solving Problems. Creating Better Digital
-                Experiences.
+                Building Software.
+                <br />
+                Testing with Purpose.
+                <br />
+                Delivering Better Digital Experiences.
               </motion.h2>
 
               <motion.div
