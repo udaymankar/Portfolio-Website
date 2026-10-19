@@ -770,7 +770,7 @@ export default function Home() {
 
             <motion.p
               variants={fadeUp}
-              className="mb-8"
+              className="mb-10"
               style={{
                 color: "#b0a89e",
                 maxWidth: "480px",
@@ -780,71 +780,104 @@ export default function Home() {
               }}
             >
               I&apos;m open to entry-level opportunities, meaningful projects, and
-              conversations about software development.
+              conversations about software development. Fill in the form and
+              I&apos;ll get back to you as soon as possible.
             </motion.p>
 
-            <motion.div
-              variants={fadeUp}
-              className="flex flex-wrap gap-4 mb-12"
-            >
-              <a
-                href="mailto:udaymankar9@gmail.com"
-                className="btn-primary"
-                style={{
-                  background: "var(--ivory)",
-                  color: "var(--ink)",
-                  borderColor: "var(--ivory)",
-                }}
-              >
-                <Mail size={13} />
-                Email Me
-              </a>
-              <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noreferrer"
-                download="Uday_Mankar_Resume.pdf"
-                className="btn-outline"
-                style={{
-                  color: "var(--ivory)",
-                  borderColor: "rgba(250,248,244,0.3)",
-                }}
-              >
-                <Download size={13} />
-                Resume
-              </a>
-            </motion.div>
+            <motion.div variants={fadeUp} className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+              {/* Form */}
+              <ContactForm />
 
-            <motion.div
-              variants={fadeUp}
-              className="flex flex-wrap gap-6 border-t pt-8"
-              style={{ borderColor: "rgba(250,248,244,0.15)" }}
-            >
-              <a
-                href="https://github.com/udaymankar"
-                target="_blank"
-                rel="noreferrer"
-                className="contact-link"
-                style={{ color: "#b0a89e" }}
+              {/* Side info panel */}
+              <div
+                className="border-t lg:border-t-0 lg:border-l pt-8 lg:pt-0 lg:pl-10"
+                style={{ borderColor: "rgba(250,248,244,0.12)" }}
               >
-                GitHub <ArrowUpRight size={11} />
-              </a>
-              <a
-                href="https://linkedin.com/in/udaymankar"
-                target="_blank"
-                rel="noreferrer"
-                className="contact-link"
-                style={{ color: "#b0a89e" }}
-              >
-                LinkedIn <ArrowUpRight size={11} />
-              </a>
-              <a
-                href="mailto:udaymankar9@gmail.com"
-                className="contact-link"
-                style={{ color: "#b0a89e" }}
-              >
-                udaymankar9@gmail.com
-              </a>
+                <p className="eyebrow mb-5" style={{ color: "#c9a8b0" }}>
+                  Other Ways to Reach Me
+                </p>
+
+                <div className="space-y-5">
+                  {[
+                    {
+                      label: "Email",
+                      content: (
+                        <a
+                          href="mailto:udaymankar9@gmail.com"
+                          className="contact-link"
+                          style={{ color: "var(--ivory)", fontSize: "0.9rem" }}
+                        >
+                          udaymankar9@gmail.com
+                        </a>
+                      ),
+                    },
+                    {
+                      label: "GitHub",
+                      content: (
+                        <a
+                          href="https://github.com/udaymankar"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="contact-link"
+                          style={{ color: "var(--ivory)", fontSize: "0.9rem" }}
+                        >
+                          github.com/udaymankar <ArrowUpRight size={11} />
+                        </a>
+                      ),
+                    },
+                    {
+                      label: "LinkedIn",
+                      content: (
+                        <a
+                          href="https://linkedin.com/in/udaymankar"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="contact-link"
+                          style={{ color: "var(--ivory)", fontSize: "0.9rem" }}
+                        >
+                          linkedin.com/in/udaymankar <ArrowUpRight size={11} />
+                        </a>
+                      ),
+                    },
+                    {
+                      label: "Location",
+                      content: (
+                        <p style={{ color: "var(--ivory)", fontFamily: "var(--font-sans)", fontSize: "0.9rem" }}>
+                          Pune, Maharashtra, India
+                        </p>
+                      ),
+                    },
+                  ].map((row) => (
+                    <div
+                      key={row.label}
+                      className="pb-4 border-b"
+                      style={{ borderColor: "rgba(250,248,244,0.1)" }}
+                    >
+                      <p
+                        className="meta-text mb-1"
+                        style={{ color: "#6e6560", textTransform: "uppercase", letterSpacing: "0.1em" }}
+                      >
+                        {row.label}
+                      </p>
+                      {row.content}
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-8">
+                  <a
+                    href="/resume.pdf"
+                    target="_blank"
+                    rel="noreferrer"
+                    download="Uday_Mankar_Resume.pdf"
+                    className="btn-outline"
+                    style={{ color: "var(--ivory)", borderColor: "rgba(250,248,244,0.3)" }}
+                  >
+                    <Download size={13} />
+                    Download Resume
+                  </a>
+                </div>
+              </div>
             </motion.div>
           </AnimatedSection>
         </div>
@@ -875,5 +908,332 @@ export default function Home() {
         </div>
       </section>
     </div>
+  );
+}
+
+/* ─── ContactForm component ──────────────────────────────────────────── */
+type FormState = "idle" | "loading" | "success" | "error";
+
+function ContactForm() {
+  const [state, setState] = useState<FormState>("idle");
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [fields, setFields] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const validate = () => {
+    const e: Record<string, string> = {};
+    if (!fields.name.trim()) e.name = "Name is required.";
+    if (!fields.email.trim()) {
+      e.email = "Email is required.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) {
+      e.email = "Please enter a valid email address.";
+    }
+    if (!fields.message.trim()) e.message = "Message is required.";
+    else if (fields.message.trim().length < 10)
+      e.message = "Message must be at least 10 characters.";
+    return e;
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFields((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const errs = validate();
+    if (Object.keys(errs).length > 0) {
+      setErrors(errs);
+      return;
+    }
+    setState("loading");
+    try {
+      const res = await fetch("https://formspree.io/f/xpwzjdpn", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: fields.name,
+          email: fields.email,
+          subject: fields.subject || "(No subject)",
+          message: fields.message,
+        }),
+      });
+      if (res.ok) {
+        setState("success");
+        setFields({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setState("error");
+      }
+    } catch {
+      setState("error");
+    }
+  };
+
+  const inputBase: React.CSSProperties = {
+    width: "100%",
+    background: "rgba(250,248,244,0.06)",
+    border: "1px solid rgba(250,248,244,0.18)",
+    color: "var(--ivory)",
+    fontFamily: "var(--font-sans)",
+    fontSize: "0.9rem",
+    padding: "0.75rem 1rem",
+    outline: "none",
+    transition: "border-color 0.2s",
+  };
+
+  const labelBase: React.CSSProperties = {
+    display: "block",
+    fontFamily: "var(--font-sans)",
+    fontSize: "0.65rem",
+    fontWeight: 600,
+    letterSpacing: "0.14em",
+    textTransform: "uppercase" as const,
+    color: "#9a9088",
+    marginBottom: "0.4rem",
+  };
+
+  const errorStyle: React.CSSProperties = {
+    fontFamily: "var(--font-sans)",
+    fontSize: "0.72rem",
+    color: "#f28b82",
+    marginTop: "0.3rem",
+  };
+
+  if (state === "success") {
+    return (
+      <div
+        style={{
+          border: "1px solid rgba(165,214,167,0.4)",
+          background: "rgba(46,125,50,0.12)",
+          padding: "2.5rem 2rem",
+          textAlign: "center",
+        }}
+      >
+        <div
+          style={{
+            width: "48px",
+            height: "48px",
+            background: "rgba(46,125,50,0.2)",
+            borderRadius: "50%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            margin: "0 auto 1rem",
+            color: "#a5d6a7",
+            fontSize: "1.4rem",
+          }}
+        >
+          ✓
+        </div>
+        <p
+          className="headline-md"
+          style={{ color: "var(--ivory)", fontSize: "1.1rem", marginBottom: "0.5rem" }}
+        >
+          Message Sent
+        </p>
+        <p style={{ color: "#b0a89e", fontFamily: "var(--font-sans)", fontSize: "0.875rem" }}>
+          Thank you for reaching out. I&apos;ll get back to you as soon as possible.
+        </p>
+        <button
+          onClick={() => setState("idle")}
+          className="btn-outline mt-6"
+          style={{ color: "var(--ivory)", borderColor: "rgba(250,248,244,0.3)" }}
+        >
+          Send Another Message
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} noValidate>
+      <div className="grid gap-5">
+        {/* Name + Email row */}
+        <div className="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label htmlFor="cf-name" style={labelBase}>
+              Full Name <span style={{ color: "#f28b82" }}>*</span>
+            </label>
+            <input
+              id="cf-name"
+              name="name"
+              type="text"
+              autoComplete="name"
+              placeholder="Your name"
+              value={fields.name}
+              onChange={handleChange}
+              style={{
+                ...inputBase,
+                borderColor: errors.name ? "#f28b82" : "rgba(250,248,244,0.18)",
+              }}
+              onFocus={(e) => (e.target.style.borderColor = "rgba(250,248,244,0.5)")}
+              onBlur={(e) =>
+                (e.target.style.borderColor = errors.name
+                  ? "#f28b82"
+                  : "rgba(250,248,244,0.18)")
+              }
+            />
+            {errors.name && <p style={errorStyle}>{errors.name}</p>}
+          </div>
+
+          <div>
+            <label htmlFor="cf-email" style={labelBase}>
+              Email Address <span style={{ color: "#f28b82" }}>*</span>
+            </label>
+            <input
+              id="cf-email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              placeholder="you@example.com"
+              value={fields.email}
+              onChange={handleChange}
+              style={{
+                ...inputBase,
+                borderColor: errors.email ? "#f28b82" : "rgba(250,248,244,0.18)",
+              }}
+              onFocus={(e) => (e.target.style.borderColor = "rgba(250,248,244,0.5)")}
+              onBlur={(e) =>
+                (e.target.style.borderColor = errors.email
+                  ? "#f28b82"
+                  : "rgba(250,248,244,0.18)")
+              }
+            />
+            {errors.email && <p style={errorStyle}>{errors.email}</p>}
+          </div>
+        </div>
+
+        {/* Subject */}
+        <div>
+          <label htmlFor="cf-subject" style={labelBase}>
+            Subject
+          </label>
+          <select
+            id="cf-subject"
+            name="subject"
+            value={fields.subject}
+            onChange={handleChange}
+            style={{
+              ...inputBase,
+              appearance: "none" as const,
+              cursor: "pointer",
+            }}
+          >
+            <option value="" style={{ background: "#1a1a1a" }}>
+              Select a topic…
+            </option>
+            <option value="Job Opportunity" style={{ background: "#1a1a1a" }}>
+              Job Opportunity
+            </option>
+            <option value="Internship" style={{ background: "#1a1a1a" }}>
+              Internship
+            </option>
+            <option value="Project Collaboration" style={{ background: "#1a1a1a" }}>
+              Project Collaboration
+            </option>
+            <option value="Freelance Work" style={{ background: "#1a1a1a" }}>
+              Freelance Work
+            </option>
+            <option value="General Inquiry" style={{ background: "#1a1a1a" }}>
+              General Inquiry
+            </option>
+          </select>
+        </div>
+
+        {/* Message */}
+        <div>
+          <label htmlFor="cf-message" style={labelBase}>
+            Message <span style={{ color: "#f28b82" }}>*</span>
+          </label>
+          <textarea
+            id="cf-message"
+            name="message"
+            rows={5}
+            placeholder="Tell me about your project, opportunity, or idea…"
+            value={fields.message}
+            onChange={handleChange}
+            style={{
+              ...inputBase,
+              resize: "vertical",
+              minHeight: "130px",
+              borderColor: errors.message ? "#f28b82" : "rgba(250,248,244,0.18)",
+            }}
+            onFocus={(e) => (e.target.style.borderColor = "rgba(250,248,244,0.5)")}
+            onBlur={(e) =>
+              (e.target.style.borderColor = errors.message
+                ? "#f28b82"
+                : "rgba(250,248,244,0.18)")
+            }
+          />
+          {errors.message && <p style={errorStyle}>{errors.message}</p>}
+        </div>
+
+        {/* Error banner */}
+        {state === "error" && (
+          <p
+            style={{
+              fontFamily: "var(--font-sans)",
+              fontSize: "0.8rem",
+              color: "#f28b82",
+              padding: "0.6rem 0.9rem",
+              border: "1px solid rgba(242,139,130,0.3)",
+              background: "rgba(242,139,130,0.08)",
+            }}
+          >
+            Something went wrong. Please try again or email me directly at udaymankar9@gmail.com
+          </p>
+        )}
+
+        {/* Submit */}
+        <div>
+          <button
+            type="submit"
+            disabled={state === "loading"}
+            className="btn-primary"
+            style={{
+              background: state === "loading" ? "rgba(250,248,244,0.7)" : "var(--ivory)",
+              color: "var(--ink)",
+              borderColor: "var(--ivory)",
+              cursor: state === "loading" ? "not-allowed" : "pointer",
+              opacity: state === "loading" ? 0.8 : 1,
+            }}
+          >
+            {state === "loading" ? (
+              <>
+                <span
+                  style={{
+                    display: "inline-block",
+                    width: "12px",
+                    height: "12px",
+                    border: "2px solid var(--ink)",
+                    borderTopColor: "transparent",
+                    borderRadius: "50%",
+                    animation: "spin 0.7s linear infinite",
+                  }}
+                />
+                Sending…
+              </>
+            ) : (
+              <>
+                <Mail size={13} />
+                Send Message
+              </>
+            )}
+          </button>
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes spin { to { transform: rotate(360deg); } }
+        input::placeholder, textarea::placeholder { color: #5a5450; }
+      `}</style>
+    </form>
   );
 }
