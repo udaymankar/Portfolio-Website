@@ -390,7 +390,7 @@ export default function Home() {
           <div className="flex items-center justify-between">
             <a href="#" aria-label="Home">
               <h1 className="masthead-wordmark text-3xl sm:text-4xl md:text-5xl">
-                UDAY MANKAR
+                UDAY KISAN MANKAR
               </h1>
             </a>
 
@@ -1064,7 +1064,7 @@ export default function Home() {
             className="masthead-wordmark"
             style={{ fontSize: "1rem", color: "var(--ivory)" }}
           >
-            UDAY MANKAR
+            UDAY KISAN MANKAR
           </p>
           <p
             style={{
