@@ -435,31 +435,3 @@ html {
 }
 
 
-/* Custom fountain-pen nib cursor — color shifts as it travels */
-.pen-cursor {
-  position: fixed;
-  z-index: 9999;
-  pointer-events: none;
-  transform: translate(-5px, -4px) rotate(42deg);
-  opacity: 0;
-  transition: opacity 120ms ease, color 240ms ease;
-  will-change: left, top, transform, color;
-  filter: drop-shadow(0 1px 0 rgba(255,255,255,.22));
-}
-body.scissor-cursor-enabled,
-body.scissor-cursor-enabled * {
-  cursor: none !important;
-}
-body.scissor-cursor-enabled .pen-cursor { opacity: 1; }
-.pen-cursor.is-cutting { animation: pen-nib-tap 220ms ease-in-out; }
-@keyframes pen-nib-tap {
-  0%, 100% { transform: translate(-5px, -4px) rotate(42deg) scale(1); }
-  45% { transform: translate(-5px, -4px) rotate(42deg) scale(.78); }
-  70% { transform: translate(-5px, -4px) rotate(42deg) scale(1.08); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .pen-cursor.is-cutting { animation-duration: 1ms; }
-}
-@media (pointer: coarse) {
-  .pen-cursor { display: none !important; }
-}
