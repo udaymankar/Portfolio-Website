@@ -379,7 +379,7 @@ export default function Home() {
           style={{ borderColor: "var(--rule-light)" }}
         >
           <span className="meta-text">
-            SOFTWARE ENGINEERING · THE UDAY TIMES
+            DEVELOPMENT · QUALITY ASSURANCE · DIGITAL PRODUCTS
           </span>
           <span className="meta-text">{edition}</span>
           <span className="avail-badge">Open to Opportunities</span>
