@@ -649,7 +649,7 @@ export default function Home() {
             The Person Behind the Code
           </motion.h2>
 
-          <div className="grid gap-8 md:grid-cols-[0.8fr_1fr_1fr] md:gap-10 lg:gap-14">
+          <div className="grid items-start gap-8 md:grid-cols-[minmax(220px,0.72fr)_minmax(0,1fr)] lg:grid-cols-[minmax(240px,0.78fr)_minmax(0,1fr)_minmax(0,1fr)] md:gap-8 lg:gap-10">
             <motion.figure variants={fadeUp} className="md:sticky md:top-28 md:self-start">
               <img
                 src="/Uday%20Passport%20photo%20og.png"
@@ -665,7 +665,7 @@ export default function Home() {
               />
               <figcaption className="meta-text mt-2">A little about the person behind the projects</figcaption>
             </motion.figure>
-            <motion.div variants={fadeUp}>
+            <motion.div variants={fadeUp} className="min-w-0">
               <p
                 className="eyebrow mb-3"
                 style={{ color: "var(--burgundy)" }}
@@ -674,31 +674,37 @@ export default function Home() {
               </p>
               <hr style={{ borderColor: "var(--rule)", marginBottom: "1rem" }} />
               <p className="body-text" style={{ fontSize: "0.95rem" }}>
-                I build frontend and backend features — from structured Java
-                applications to web interfaces that feel clean and usable. My
-                work spans console-based programs, web utilities, and portfolio
-                experiences. I care about functionality and presentation
-                equally.
+                I develop practical software applications and web experiences
+                using Java and modern web technologies. I enjoy turning ideas
+                into useful products, building intuitive interfaces, and
+                creating features that solve real problems.
               </p>
             </motion.div>
 
-            <motion.div variants={fadeUp}>
+            <motion.div variants={fadeUp} className="min-w-0 md:col-span-2 lg:col-span-1">
               <p
                 className="eyebrow mb-3"
                 style={{ color: "var(--burgundy)" }}
               >
-                How I Approach Problems
+                How I Ensure Quality
               </p>
               <hr style={{ borderColor: "var(--rule)", marginBottom: "1rem" }} />
               <p className="body-text" style={{ fontSize: "0.95rem" }}>
-                I keep code organised, write reusable components, and focus on
-                shipping reliable functionality. I value strong fundamentals —
-                data structures, object-oriented design, and clean architecture
-                — and I&apos;m always looking for the most readable, maintainable
-                solution.
+                I approach software with both a developer&apos;s mindset and a
+                tester&apos;s attention to detail. From writing clean,
+                maintainable code to designing test cases and exploring
+                automation, I aim to build applications that are functional,
+                reliable, and easy to use.
               </p>
             </motion.div>
           </div>
+          <motion.p
+            variants={fadeUp}
+            className="eyebrow mt-8 border-t pt-4"
+            style={{ color: "var(--burgundy)", borderColor: "var(--rule-light)" }}
+          >
+            Software Development <span aria-hidden="true">·</span> Manual Testing <span aria-hidden="true">·</span> Automation Testing
+          </motion.p>
         </AnimatedSection>
       </section>
 
