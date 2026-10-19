@@ -955,25 +955,18 @@ function ContactForm() {
     }
     setState("loading");
     try {
-      const res = await fetch(
-        "https://formsubmit.co/ajax/udayamanakar2004@gmail.com",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({
-            name: fields.name,
-            email: fields.email,
-            _subject: fields.subject
-              ? `[Portfolio] ${fields.subject}`
-              : "[Portfolio] New message from contact form",
-            _replyto: fields.email,
-            message: fields.message,
-            _captcha: "false",
-          }),
-        }
-      );
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fields.name,
+          email: fields.email,
+          subject: fields.subject,
+          message: fields.message,
+        }),
+      });
       const json = await res.json().catch(() => ({}));
-      if (res.ok && (json as { success?: string }).success === "true") {
+      if (res.ok && (json as { success?: boolean }).success) {
         setState("success");
         setFields({ name: "", email: "", subject: "", message: "" });
       } else {
