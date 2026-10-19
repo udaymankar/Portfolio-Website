@@ -222,27 +222,24 @@ const skillGroups = [
 
 const timeline = [
   {
-    year: "2026",
-    title: "Software Testing & Development",
-    desc: "Building practical projects and seeking entry-level opportunities in software quality assurance and development.",
-  },
-  {
-    year: "2022–2026",
+    year: "HIGHER EDUCATION",
     title: "B.Tech, Computer Science Engineering",
-    desc: "Sant Gadge Baba Amravati University — studied core computer science, object-oriented programming, databases, and web technologies.",
+    desc: "Sant Gadge Baba Amravati University — Computer Science Engineering.",
   },
   {
-    year: "2021–2022",
-    title: "Higher Secondary Certificate",
-    desc: "Shri Jageshwar Junior College, Wadegaon — completed HSC in Science stream.",
+    year: "TRAINING",
+    title: "Software Testing Training",
+    desc: "Cyber Success, Pune — practical learning in software testing and QA fundamentals.",
+  },
+  {
+    year: "INTERNSHIP",
+    title: "Web Application Development Internship",
+    desc: "iBase Electrosoft LLP — internship focused on web application development.",
   },
 ];
 
 const certifications = [
   {
-    title: "Web Application Development Internship",
-    org: "iBase Electrosoft LLP",
-  },
   { title: "Programming in Java", org: "Infosys Springboard" },
   { title: "Database and SQL", org: "Infosys Springboard" },
   { title: "Learn Java Masterclass (Java 17)", org: "Udemy" },
@@ -866,7 +863,7 @@ export default function Home() {
             className="headline-lg mb-8"
             style={{ fontSize: "clamp(1.6rem, 3vw, 2.4rem)", maxWidth: "520px" }}
           >
-            Education &amp; Career Direction
+            Education, Training &amp; Experience
           </motion.h2>
 
           <div className="mb-12">
