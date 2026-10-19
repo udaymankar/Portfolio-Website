@@ -153,24 +153,70 @@ const projects = [
 
 const skillGroups = [
   {
-    category: "Programming",
-    skills: ["Java", "JavaScript", "Python"],
+    category: "Manual Testing",
+    skills: [
+      "Functional Testing",
+      "Regression Testing",
+      "Smoke Testing",
+      "Sanity Testing",
+      "Integration Testing",
+      "Black Box Testing",
+      "UI Testing",
+      "Test Case Design",
+      "Positive & Negative Testing",
+      "Boundary Value Analysis",
+      "Test Planning & Execution",
+    ],
   },
   {
-    category: "Web",
-    skills: ["HTML5", "CSS3", "Tailwind CSS", "Bootstrap"],
+    category: "Test Automation",
+    skills: [
+      "Selenium WebDriver",
+      "Java Automation",
+      "Page Object Model (POM)",
+      "Automated Test Scripts",
+      "Regression Automation",
+    ],
   },
   {
-    category: "Database",
-    skills: ["SQL"],
+    category: "Defect Management",
+    skills: [
+      "Bug Life Cycle",
+      "Defect Reporting",
+      "Severity & Priority",
+      "Retesting",
+      "Defect Tracking",
+    ],
   },
   {
-    category: "Tools",
-    skills: ["Git", "GitHub"],
+    category: "API & Database",
+    skills: [
+      "Postman",
+      "REST API Testing",
+      "HTTP Methods",
+      "JSON",
+      "SQL",
+      "MySQL",
+      "Joins",
+      "Aggregations",
+      "Data Validation",
+    ],
   },
   {
-    category: "Fundamentals",
-    skills: ["Object-Oriented Programming", "Data Structures & Algorithms"],
+    category: "Programming & Web",
+    skills: ["Core Java", "OOP", "JavaScript", "HTML5", "CSS3", "Bootstrap"],
+  },
+  {
+    category: "Process & Tools",
+    skills: [
+      "SDLC",
+      "STLC",
+      "Agile / Scrum",
+      "Git",
+      "GitHub",
+      "VS Code",
+      "Eclipse",
+    ],
   },
 ];
 
