@@ -480,9 +480,18 @@ export default function Home() {
             transition: "transform 320ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease, max-height 320ms ease, padding 320ms ease",
           }}
         >
-          <p className="meta-text" style={{ textTransform: "none", letterSpacing: "0.04em" }}>
-            The Uday Times · Pune, India
-          </p>
+          <div
+            className="publication-marquee"
+            role="region"
+            aria-label="The Uday Times, Pune, India"
+          >
+            <div className="publication-marquee__track">
+              <span className="publication-marquee__item">The Uday Times <span aria-hidden="true">·</span> Pune, India</span>
+              <span className="publication-marquee__item" aria-hidden="true">The Uday Times <span>·</span> Pune, India</span>
+              <span className="publication-marquee__item" aria-hidden="true">The Uday Times <span>·</span> Pune, India</span>
+              <span className="publication-marquee__item" aria-hidden="true">The Uday Times <span>·</span> Pune, India</span>
+            </div>
+          </div>
         </div>
 
         {/* Mobile sub-bar */}
