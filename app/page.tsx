@@ -379,7 +379,7 @@ export default function Home() {
           style={{ borderColor: "var(--rule-light)" }}
         >
           <span className="meta-text">
-            DEVELOPMENT · QUALITY ASSURANCE · DIGITAL PRODUCTS
+            THE UDAY TIMES · DEVELOPMENT &amp; QUALITY ASSURANCE
           </span>
           <span className="meta-text">{edition}</span>
           <span className="avail-badge">Open to Opportunities</span>
@@ -388,11 +388,8 @@ export default function Home() {
         {/* Main masthead row */}
         <div className="mx-auto max-w-7xl px-6 py-4">
           <div className="flex items-center justify-between">
-            <a href="#" aria-label="Home" className="min-w-0 flex-1 mr-4">
-              <h1
-                className="masthead-wordmark whitespace-nowrap"
-                style={{ fontSize: "clamp(1.55rem, 4.1vw, 3.8rem)" }}
-              >
+            <a href="#" aria-label="Home">
+              <h1 className="masthead-wordmark text-3xl sm:text-4xl md:text-5xl">
                 UDAY KISAN MANKAR
               </h1>
             </a>
