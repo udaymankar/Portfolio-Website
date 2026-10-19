@@ -310,6 +310,8 @@ function TechTag({ label }: { label: string }) {
 /* ─── Page ───────────────────────────────────────────────────────────── */
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [headerVisible, setHeaderVisible] = useState(true);
+  const lastScrollY = useRef(0);
   const [edition, setEdition] = useState("");
   useEffect(() => {
     const d = new Date();
@@ -324,7 +326,25 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      const scrollingDown = currentY > lastScrollY.current;
+      // Keep the masthead visible at the top; hide on downward scroll,
+      // reveal it again when the visitor scrolls upward.
+      if (currentY < 48 || !scrollingDown) {
+        setHeaderVisible(true);
+      } else if (currentY > lastScrollY.current + 4) {
+        setHeaderVisible(false);
+      }
+      lastScrollY.current = currentY;
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
     if (menuOpen) {
+      setHeaderVisible(true);
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -391,6 +411,9 @@ export default function Home() {
         style={{
           background: "var(--ivory)",
           borderColor: "var(--rule)",
+          transform: headerVisible ? "translateY(0)" : "translateY(-100%)",
+          transition: "transform 320ms cubic-bezier(0.22, 1, 0.36, 1)",
+          willChange: "transform",
         }}
       >
         {/* Top bar */}
