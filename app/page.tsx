@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, type Variants, useInView } from "framer-motion";
-import { ArrowUpRight, Download, Mail, MapPin, Menu, X } from "lucide-react";
+import { ArrowUpRight, Download, Mail, MapPin, Menu, Scissors, X } from "lucide-react";
 
 /* ─── Animation variants ─────────────────────────────────────────────── */
 const fadeUp: Variants = {
@@ -290,6 +290,25 @@ function TechTag({ label }: { label: string }) {
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [edition, setEdition] = useState("");
+  const [cursorPosition, setCursorPosition] = useState({ x: -100, y: -100 });
+  const [isCutting, setIsCutting] = useState(false);
+
+  useEffect(() => {
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+    document.body.classList.add("scissor-cursor-enabled");
+    const move = (event: MouseEvent) => setCursorPosition({ x: event.clientX, y: event.clientY });
+    const down = () => setIsCutting(true);
+    const up = () => setIsCutting(false);
+    window.addEventListener("mousemove", move);
+    window.addEventListener("mousedown", down);
+    window.addEventListener("mouseup", up);
+    return () => {
+      document.body.classList.remove("scissor-cursor-enabled");
+      window.removeEventListener("mousemove", move);
+      window.removeEventListener("mousedown", down);
+      window.removeEventListener("mouseup", up);
+    };
+  }, []);
 
   useEffect(() => {
     const d = new Date();
@@ -316,6 +335,13 @@ export default function Home() {
 
   return (
     <div className="min-h-screen" style={{ background: "var(--ivory)" }}>
+      <div
+        className={`scissor-cursor ${isCutting ? "is-cutting" : ""}`}
+        style={{ left: cursorPosition.x, top: cursorPosition.y }}
+        aria-hidden="true"
+      >
+        <Scissors size={25} strokeWidth={1.8} />
+      </div>
       {/* ── Mobile Menu ──────────────────────────────────────────────── */}
       <div
         className={`mobile-menu ${menuOpen ? "open" : ""}`}
