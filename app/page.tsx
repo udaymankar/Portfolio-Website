@@ -570,7 +570,7 @@ export default function Home() {
                 {[
                   { label: "Core Language", value: "Java" },
                   { label: "Projects Shipped", value: "3+" },
-                  { label: "Focus Area", value: "Software Dev" },
+                  { label: "Focus Area", value: "Software Dev & Testing" },
                   { label: "Location", value: "Pune, India" },
                   { label: "Status", value: "Seeking Roles" },
                 ].map((item) => (
