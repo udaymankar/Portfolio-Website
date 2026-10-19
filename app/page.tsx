@@ -579,7 +579,7 @@ export default function Home() {
               <div className="space-y-4">
                 {[
                   { label: "Core Language", value: "Java" },
-                  { label: "Projects Shipped", value: "3+" },
+                  { label: "Projects Shipped", value: "10+" },
                   { label: "Focus Area", value: "Software Dev & Testing" },
                   { label: "Location", value: "Pune, India" },
                   { label: "Status", value: "Seeking Roles" },
