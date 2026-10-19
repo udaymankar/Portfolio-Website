@@ -388,14 +388,17 @@ export default function Home() {
         {/* Main masthead row */}
         <div className="mx-auto max-w-7xl px-6 py-4">
           <div className="flex items-center justify-between">
-            <a href="#" aria-label="Home">
-              <h1 className="masthead-wordmark text-3xl sm:text-4xl md:text-5xl">
+            <a href="#" aria-label="Home" className="min-w-0 flex-1 mr-4">
+              <h1
+                className="masthead-wordmark whitespace-nowrap"
+                style={{ fontSize: "clamp(1.55rem, 4.1vw, 3.8rem)" }}
+              >
                 UDAY KISAN MANKAR
               </h1>
             </a>
 
             {/* Desktop nav */}
-            <nav className="hidden md:flex items-center gap-8">
+            <nav className="hidden md:flex shrink-0 items-center gap-4 lg:gap-8">
               {navLinks.map((l) => (
                 <a key={l.href} href={l.href} className="nav-link">
                   {l.label}
