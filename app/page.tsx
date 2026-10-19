@@ -310,7 +310,7 @@ function TechTag({ label }: { label: string }) {
 /* ─── Page ───────────────────────────────────────────────────────────── */
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [headerVisible, setHeaderVisible] = useState(true);
+  const [identityVisible, setIdentityVisible] = useState(true);
   const lastScrollY = useRef(0);
   const [edition, setEdition] = useState("");
   useEffect(() => {
@@ -329,12 +329,12 @@ export default function Home() {
     const handleScroll = () => {
       const currentY = window.scrollY;
       const scrollingDown = currentY > lastScrollY.current;
-      // Keep the masthead visible at the top; hide on downward scroll,
-      // reveal it again when the visitor scrolls upward.
+      // Hide only the publication identity strip on downward scroll;
+      // keep the full masthead and navigation visible.
       if (currentY < 48 || !scrollingDown) {
-        setHeaderVisible(true);
+        setIdentityVisible(true);
       } else if (currentY > lastScrollY.current + 4) {
-        setHeaderVisible(false);
+        setIdentityVisible(false);
       }
       lastScrollY.current = currentY;
     };
@@ -344,7 +344,7 @@ export default function Home() {
 
   useEffect(() => {
     if (menuOpen) {
-      setHeaderVisible(true);
+      setIdentityVisible(true);
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -411,9 +411,6 @@ export default function Home() {
         style={{
           background: "var(--ivory)",
           borderColor: "var(--rule)",
-          transform: headerVisible ? "translateY(0)" : "translateY(-100%)",
-          transition: "transform 320ms cubic-bezier(0.22, 1, 0.36, 1)",
-          willChange: "transform",
         }}
       >
         {/* Top bar */}
@@ -472,7 +469,16 @@ export default function Home() {
         {/* Centered publication identity beneath the name */}
         <div
           className="border-t px-4 py-2.5 text-center"
-          style={{ borderColor: "var(--rule-light)" }}
+          style={{
+            borderColor: "var(--rule-light)",
+            transform: identityVisible ? "translateY(0)" : "translateY(-100%)",
+            opacity: identityVisible ? 1 : 0,
+            maxHeight: identityVisible ? "48px" : "0px",
+            paddingTop: identityVisible ? undefined : 0,
+            paddingBottom: identityVisible ? undefined : 0,
+            overflow: "hidden",
+            transition: "transform 320ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease, max-height 320ms ease, padding 320ms ease",
+          }}
         >
           <p className="meta-text" style={{ textTransform: "none", letterSpacing: "0.04em" }}>
             The Uday Times · Pune, India
