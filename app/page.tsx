@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, type Variants, useInView } from "framer-motion";
-import { ArrowUpRight, Download, Mail, MapPin, Menu, Scissors, X } from "lucide-react";
+import { ArrowUpRight, Download, Mail, MapPin, Menu, PenTool, X } from "lucide-react";
 
 /* ─── Animation variants ─────────────────────────────────────────────── */
 const fadeUp: Variants = {
@@ -292,11 +292,16 @@ export default function Home() {
   const [edition, setEdition] = useState("");
   const [cursorPosition, setCursorPosition] = useState({ x: -100, y: -100 });
   const [isCutting, setIsCutting] = useState(false);
+  const [cursorHue, setCursorHue] = useState(350);
 
   useEffect(() => {
     if (!window.matchMedia("(pointer: fine)").matches) return;
     document.body.classList.add("scissor-cursor-enabled");
-    const move = (event: MouseEvent) => setCursorPosition({ x: event.clientX, y: event.clientY });
+    const move = (event: MouseEvent) => {
+      setCursorPosition({ x: event.clientX, y: event.clientY });
+      // Shift through a restrained editorial palette as the pointer moves.
+      setCursorHue((Math.floor((event.clientX + event.clientY) / 90) * 37 + 350) % 360);
+    };
     const down = () => setIsCutting(true);
     const up = () => setIsCutting(false);
     window.addEventListener("mousemove", move);
@@ -336,11 +341,11 @@ export default function Home() {
   return (
     <div className="min-h-screen" style={{ background: "var(--ivory)" }}>
       <div
-        className={`scissor-cursor ${isCutting ? "is-cutting" : ""}`}
-        style={{ left: cursorPosition.x, top: cursorPosition.y }}
+        className={`pen-cursor ${isCutting ? "is-cutting" : ""}`}
+        style={{ left: cursorPosition.x, top: cursorPosition.y, color: `hsl(${cursorHue} 68% 38%)` }}
         aria-hidden="true"
       >
-        <Scissors size={25} strokeWidth={1.8} />
+        <PenTool size={31} strokeWidth={2.2} fill="currentColor" />
       </div>
       {/* ── Mobile Menu ──────────────────────────────────────────────── */}
       <div
