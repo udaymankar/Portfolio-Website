@@ -326,7 +326,7 @@ export default function Home() {
             className="masthead-wordmark"
             style={{ fontSize: "1.4rem" }}
           >
-            UDAY MANKAR
+            UDAY KISAN MANKAR
           </span>
           <button
             onClick={() => setMenuOpen(false)}
