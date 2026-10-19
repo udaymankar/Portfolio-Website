@@ -1,73 +1,80 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  Download,
-  Mail,
-  MapPin,
-  Sparkles,
-  Code2,
-  Server,
-  Database,
-  Layers3,
-  CheckCircle2,
-} from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { motion, type Variants, useInView } from "framer-motion";
+import { ArrowUpRight, Download, Mail, MapPin, Menu, X } from "lucide-react";
 
+/* ─── Animation variants ─────────────────────────────────────────────── */
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: "easeOut" as const },
+    transition: { duration: 0.6, ease: "easeOut" as const },
   },
 };
 
-const staggerContainer: Variants = {
+const stagger: Variants = {
   hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 },
-  },
+  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
 
-const skills = [
-  "Java",
-  "JavaScript",
-  "Python",
-  "SQL",
-  "HTML5",
-  "CSS3",
-  "Tailwind CSS",
-  "Bootstrap",
-  "Git",
-  "GitHub",
-  "OOP",
-  "DSA",
+/* ─── Data ───────────────────────────────────────────────────────────── */
+const navLinks = [
+  { href: "#about", label: "About" },
+  { href: "#projects", label: "Projects" },
+  { href: "#skills", label: "Skills" },
+  { href: "#journey", label: "Journey" },
+  { href: "#contact", label: "Contact" },
 ];
 
 const projects = [
   {
     title: "Java ATM Simulation System",
     description:
-      "A console-based banking simulation with secure authentication, deposits, withdrawals, transfers, and transaction history.",
+      "A console-based banking simulation featuring secure authentication, deposits, withdrawals, fund transfers, and a complete transaction history engine.",
     tech: ["Java", "OOP", "Collections", "Serialization"],
     github: "https://github.com/udaymankar/atm-simulation",
+    featured: true,
   },
   {
     title: "Digital Passbook Generator",
     description:
-      "A responsive financial utility that displays transaction data in a clean and modern passbook style.",
+      "A financial utility for displaying transaction data in a clean, digital passbook-style web interface.",
     tech: ["Python", "Django", "HTML", "CSS", "Bootstrap"],
     github: "https://github.com/udaymankar/digital-passbook",
+    featured: false,
   },
   {
     title: "Portfolio Website",
     description:
-      "A premium personal portfolio with animated sections, modern styling, and responsive layout.",
+      "A personal portfolio showcasing web development, interface design, and editorial presentation.",
     tech: ["Next.js", "Tailwind CSS", "Framer Motion"],
     github: "https://github.com/udaymankar/portfolio-website",
+    featured: false,
+  },
+];
+
+const skillGroups = [
+  {
+    category: "Programming",
+    skills: ["Java", "JavaScript", "Python"],
+  },
+  {
+    category: "Web",
+    skills: ["HTML5", "CSS3", "Tailwind CSS", "Bootstrap"],
+  },
+  {
+    category: "Database",
+    skills: ["SQL"],
+  },
+  {
+    category: "Tools",
+    skills: ["Git", "GitHub"],
+  },
+  {
+    category: "Fundamentals",
+    skills: ["Object-Oriented Programming", "Data Structures & Algorithms"],
   },
 ];
 
@@ -75,435 +82,798 @@ const timeline = [
   {
     year: "2026",
     title: "Software Developer",
-    desc: "Seeking entry-level opportunities in web and software development.",
+    desc: "Actively seeking entry-level opportunities in software and web development.",
   },
   {
     year: "2022–2026",
-    title: "B.Tech CSE",
-    desc: "Completed B.Tech in Computer Science Engineering from RTM, Nagpur University.",
+    title: "B.Tech, Computer Science Engineering",
+    desc: "RTM Nagpur University — studied core CS fundamentals, OOP, DSA, databases, and web technologies.",
   },
   {
     year: "2021–2022",
-    title: "HSC",
-    desc: "Shri Jageshwar Junior College, Wadegaon.",
+    title: "Higher Secondary Certificate",
+    desc: "Shri Jageshwar Junior College, Wadegaon — completed HSC in Science stream.",
   },
 ];
 
 const certifications = [
-  "Web Application Development Internship — iBase Electrosoft LLP",
-  "Programming in Java — Infosys Springboard",
-  "Database and SQL — Infosys Springboard",
-  "Learn Java Masterclass (Java 17) — Udemy",
-  "Software Testing — Cyber Success, Pune",
-  "Campus Ambassador Certification — DevTown",
+  {
+    title: "Web Application Development Internship",
+    org: "iBase Electrosoft LLP",
+  },
+  { title: "Programming in Java", org: "Infosys Springboard" },
+  { title: "Database and SQL", org: "Infosys Springboard" },
+  { title: "Learn Java Masterclass (Java 17)", org: "Udemy" },
+  { title: "Software Testing", org: "Cyber Success, Pune" },
+  { title: "Campus Ambassador Certification", org: "DevTown" },
 ];
 
-function SectionTitle({
-  eyebrow,
-  title,
-  subtitle,
+/* ─── Helpers ────────────────────────────────────────────────────────── */
+function AnimatedSection({
+  children,
+  className = "",
 }: {
-  eyebrow: string;
-  title: string;
-  subtitle: string;
+  children: React.ReactNode;
+  className?: string;
 }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <div className="mb-10">
-      <p className="text-sm font-medium uppercase tracking-[0.4em] text-cyan-400/80">
-        {eyebrow}
-      </p>
-      <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-        {title}
-      </h2>
-      <p className="mt-4 max-w-2xl text-zinc-400">{subtitle}</p>
+    <motion.div
+      ref={ref}
+      variants={stagger}
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/* ─── Components ─────────────────────────────────────────────────────── */
+function SectionRule({ label }: { label: string }) {
+  return (
+    <div className="mb-8 border-t-2 border-[var(--ink)] pt-3">
+      <span className="eyebrow">{label}</span>
     </div>
   );
 }
 
+function TechTag({ label }: { label: string }) {
+  return <span className="tech-tag">{label}</span>;
+}
+
+/* ─── Page ───────────────────────────────────────────────────────────── */
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [edition, setEdition] = useState("");
+
+  useEffect(() => {
+    const d = new Date();
+    setEdition(
+      d.toLocaleDateString("en-GB", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })
+    );
+  }, []);
+
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
   return (
-    <main className="min-h-screen bg-[#050816] text-white">
-      <div className="pointer-events-none fixed inset-0 overflow-hidden">
-        <motion.div
-          animate={{ y: [0, -15, 0], x: [0, 10, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-40 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-cyan-500/20 blur-3xl"
-        />
-        <motion.div
-          animate={{ y: [0, 20, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute right-0 top-1/3 h-80 w-80 rounded-full bg-fuchsia-500/10 blur-3xl"
-        />
-        <motion.div
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute left-10 bottom-0 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl"
-        />
-      </div>
-
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#050816]/75 backdrop-blur-xl">
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <a href="#" className="text-lg font-semibold tracking-tight">
-            Uday<span className="text-cyan-400"> Mankar</span>
-          </a>
-
-          <div className="hidden gap-7 text-sm text-zinc-300 md:flex">
-            <a href="#about" className="transition hover:text-white">
-              About
+    <div className="min-h-screen" style={{ background: "var(--ivory)" }}>
+      {/* ── Mobile Menu ──────────────────────────────────────────────── */}
+      <div
+        className={`mobile-menu ${menuOpen ? "open" : ""}`}
+        aria-hidden={!menuOpen}
+      >
+        <div className="flex items-center justify-between mb-8">
+          <span
+            className="masthead-wordmark"
+            style={{ fontSize: "1.4rem" }}
+          >
+            UDAY MANKAR
+          </span>
+          <button
+            onClick={() => setMenuOpen(false)}
+            aria-label="Close menu"
+            className="p-2"
+            style={{ color: "var(--ink)" }}
+          >
+            <X size={22} />
+          </button>
+        </div>
+        <hr className="rule mb-6" />
+        <nav>
+          {navLinks.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="mobile-nav-link"
+              onClick={() => setMenuOpen(false)}
+            >
+              {l.label}
             </a>
-            <a href="#skills" className="transition hover:text-white">
-              Skills
-            </a>
-            <a href="#projects" className="transition hover:text-white">
-              Projects
-            </a>
-            <a href="#contact" className="transition hover:text-white">
-              Contact
-            </a>
-          </div>
-
+          ))}
+        </nav>
+        <div className="mt-auto pt-8">
           <a
             href="/resume.pdf"
             target="_blank"
             rel="noreferrer"
             download="Uday_Mankar_Resume.pdf"
-            className="inline-flex items-center gap-2 rounded-full border border-cyan-400/40 bg-cyan-400/10 px-4 py-2 text-sm font-medium text-cyan-300 transition hover:bg-cyan-400/20 hover:border-cyan-400/70"
+            className="btn-primary w-full justify-center"
+            onClick={() => setMenuOpen(false)}
           >
-            <Download className="h-4 w-4" />
-            Resume
+            <Download size={14} />
+            Download Resume
           </a>
-        </nav>
+        </div>
+      </div>
+
+      {/* ── Header / Masthead ────────────────────────────────────────── */}
+      <header
+        className="sticky top-0 z-50 border-b"
+        style={{
+          background: "var(--ivory)",
+          borderColor: "var(--rule)",
+        }}
+      >
+        {/* Top bar */}
+        <div
+          className="border-b py-1.5 px-6 hidden md:flex items-center justify-between"
+          style={{ borderColor: "var(--rule-light)" }}
+        >
+          <span className="meta-text">
+            SOFTWARE ENGINEERING · DIGITAL PRODUCTS
+          </span>
+          <span className="meta-text">{edition}</span>
+          <span className="avail-badge">Open to Opportunities</span>
+        </div>
+
+        {/* Main masthead row */}
+        <div className="mx-auto max-w-7xl px-6 py-4">
+          <div className="flex items-center justify-between">
+            <a href="#" aria-label="Home">
+              <h1 className="masthead-wordmark text-3xl sm:text-4xl md:text-5xl">
+                UDAY MANKAR
+              </h1>
+            </a>
+
+            {/* Desktop nav */}
+            <nav className="hidden md:flex items-center gap-8">
+              {navLinks.map((l) => (
+                <a key={l.href} href={l.href} className="nav-link">
+                  {l.label}
+                </a>
+              ))}
+            </nav>
+
+            <div className="flex items-center gap-3">
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noreferrer"
+                download="Uday_Mankar_Resume.pdf"
+                className="btn-outline hidden md:inline-flex"
+              >
+                <Download size={13} />
+                Resume
+              </a>
+              <button
+                className="md:hidden p-2"
+                onClick={() => setMenuOpen(true)}
+                aria-label="Open menu"
+                style={{ color: "var(--ink)" }}
+              >
+                <Menu size={22} />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile sub-bar */}
+        <div
+          className="md:hidden border-t px-6 py-2 flex items-center justify-between"
+          style={{ borderColor: "var(--rule-light)" }}
+        >
+          <span className="meta-text">Software Engineering</span>
+          <span className="avail-badge">Open to Opportunities</span>
+        </div>
       </header>
 
-      <section className="relative mx-auto flex min-h-[90vh] max-w-7xl items-center px-6 py-20">
-        <div className="grid w-full gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
-          <motion.div variants={fadeUp} initial="hidden" animate="visible">
-            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-sm text-cyan-300">
-              <Sparkles className="h-4 w-4" />
-              Available for internships and entry-level roles
-            </div>
+      {/* ── Lead Story ───────────────────────────────────────────────── */}
+      <section className="mx-auto max-w-7xl px-6 pt-12 pb-4">
+        <div
+          className="border-t-2 border-b pt-6 pb-8 mb-0"
+          style={{ borderColor: "var(--ink)", borderBottomColor: "var(--rule)" }}
+        >
+          <div className="grid gap-8 lg:grid-cols-[1.4fr_0.6fr] lg:gap-16 lg:items-start">
+            {/* Left: lead story */}
+            <motion.div variants={stagger} initial="hidden" animate="visible">
+              <motion.p variants={fadeUp} className="eyebrow mb-3">
+                Professional Profile
+              </motion.p>
 
-            <h1 className="mt-6 max-w-4xl text-5xl font-black tracking-tight sm:text-6xl lg:text-7xl">
-              Hi, I&apos;m{" "}
-              <span className="bg-gradient-to-r from-cyan-400 via-sky-400 to-fuchsia-400 bg-clip-text text-transparent">
-                Uday Mankar
-              </span>
-              .
-              <br />
-              I build modern software and polished web experiences.
-            </h1>
-
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-300">
-              Computer Science Engineering fresher with experience in Java,
-              DSA, and full-stack web development. Focused on clean
-              design, performance, and real-world problem solving.
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-4">
-              <a
-                href="#projects"
-                className="inline-flex items-center gap-2 rounded-full bg-cyan-400 px-6 py-3 font-semibold text-zinc-950 transition hover:bg-cyan-300"
+              <motion.h2
+                variants={fadeUp}
+                className="headline-xl mb-5"
+                style={{
+                  fontSize: "clamp(2rem, 5vw, 3.5rem)",
+                  maxWidth: "700px",
+                }}
               >
-                View Projects
-                <ArrowRight className="h-4 w-4" />
-              </a>
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
-              >
-                Contact Me
-              </a>
-            </div>
+                Building Software. Solving Problems. Creating Better Digital
+                Experiences.
+              </motion.h2>
 
-            <div className="mt-10 flex flex-wrap items-center gap-5 text-sm text-zinc-400">
-              <span className="inline-flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-cyan-400" />
-                Pune, Maharashtra, India
-              </span>
+              <motion.div
+                variants={fadeUp}
+                className="body-text mb-5"
+                style={{ maxWidth: "560px", fontSize: "1.05rem" }}
+              >
+                <p>
+                  I&apos;m Uday Mankar, a Computer Science Engineering graduate
+                  focused on software development, Java, web technologies, and
+                  building practical digital products. I enjoy turning ideas
+                  into reliable applications with thoughtful design and clean
+                  implementation.
+                </p>
+              </motion.div>
+
+              <motion.div
+                variants={fadeUp}
+                className="flex items-center gap-4 mb-6 meta-text"
+              >
+                <span className="inline-flex items-center gap-1.5">
+                  <MapPin size={12} />
+                  Pune, Maharashtra, India
+                </span>
+                <span
+                  style={{
+                    width: "1px",
+                    height: "12px",
+                    background: "var(--rule)",
+                    display: "inline-block",
+                  }}
+                />
+                <a
+                  href="mailto:udaymankar9@gmail.com"
+                  className="hover:underline transition-all"
+                  style={{ color: "var(--muted)" }}
+                >
+                  udaymankar9@gmail.com
+                </a>
+              </motion.div>
+
+              <motion.div
+                variants={fadeUp}
+                className="flex flex-wrap gap-3"
+              >
+                <a href="#projects" className="btn-primary">
+                  Explore My Work
+                </a>
+                <a
+                  href="/resume.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  download="Uday_Mankar_Resume.pdf"
+                  className="btn-outline"
+                >
+                  <Download size={13} />
+                  Read My Resume
+                </a>
+              </motion.div>
+
+              <motion.div
+                variants={fadeUp}
+                className="flex gap-5 mt-5"
+              >
+                <a
+                  href="https://github.com/udaymankar"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="github-link"
+                >
+                  GitHub <ArrowUpRight size={11} />
+                </a>
+                <a
+                  href="https://linkedin.com/in/udaymankar"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="github-link"
+                >
+                  LinkedIn <ArrowUpRight size={11} />
+                </a>
+              </motion.div>
+            </motion.div>
+
+            {/* Right: edition highlights panel */}
+            <motion.aside
+              initial={{ opacity: 0, x: 16 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" as const }}
+              className="lg:border-l lg:pl-8"
+              style={{ borderColor: "var(--rule)" }}
+            >
+              <p className="eyebrow mb-4">Today&apos;s Edition</p>
+              <div className="space-y-4">
+                {[
+                  { label: "Core Language", value: "Java" },
+                  { label: "Projects Shipped", value: "3+" },
+                  { label: "Focus Area", value: "Software Dev" },
+                  { label: "Location", value: "Pune, India" },
+                  { label: "Status", value: "Seeking Roles" },
+                ].map((item) => (
+                  <div
+                    key={item.label}
+                    className="flex items-center justify-between py-2 border-b"
+                    style={{ borderColor: "var(--rule-light)" }}
+                  >
+                    <span
+                      className="meta-text"
+                      style={{ textTransform: "uppercase", letterSpacing: "0.08em" }}
+                    >
+                      {item.label}
+                    </span>
+                    <span
+                      className="serif font-semibold"
+                      style={{ color: "var(--ink)", fontSize: "0.9rem" }}
+                    >
+                      {item.value}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <div
+                className="mt-6 p-4 border"
+                style={{
+                  borderColor: "var(--burgundy)",
+                  background: "#fff9f9",
+                }}
+              >
+                <p className="eyebrow mb-2">Current Focus</p>
+                <p
+                  className="serif"
+                  style={{
+                    fontSize: "0.95rem",
+                    color: "var(--ink-mid)",
+                    lineHeight: "1.5",
+                    fontStyle: "italic",
+                  }}
+                >
+                  &ldquo;Building recruiter-friendly projects with clean code,
+                  practical features, and strong fundamentals.&rdquo;
+                </p>
+              </div>
+            </motion.aside>
+          </div>
+        </div>
+      </section>
+
+      {/* ── About ────────────────────────────────────────────────────── */}
+      <section id="about" className="mx-auto max-w-7xl px-6 py-14">
+        <AnimatedSection>
+          <motion.div variants={fadeUp}>
+            <SectionRule label="About" />
+          </motion.div>
+
+          <motion.h2
+            variants={fadeUp}
+            className="headline-lg mb-8"
+            style={{ fontSize: "clamp(1.6rem, 3vw, 2.4rem)", maxWidth: "620px" }}
+          >
+            The Person Behind the Code
+          </motion.h2>
+
+          <div className="grid gap-10 md:grid-cols-2 md:gap-16">
+            <motion.div variants={fadeUp}>
+              <p
+                className="eyebrow mb-3"
+                style={{ color: "var(--burgundy)" }}
+              >
+                What I Build
+              </p>
+              <hr style={{ borderColor: "var(--rule)", marginBottom: "1rem" }} />
+              <p className="body-text" style={{ fontSize: "0.95rem" }}>
+                I build frontend and backend features — from structured Java
+                applications to web interfaces that feel clean and usable. My
+                work spans console-based programs, web utilities, and portfolio
+                experiences. I care about functionality and presentation
+                equally.
+              </p>
+            </motion.div>
+
+            <motion.div variants={fadeUp}>
+              <p
+                className="eyebrow mb-3"
+                style={{ color: "var(--burgundy)" }}
+              >
+                How I Approach Problems
+              </p>
+              <hr style={{ borderColor: "var(--rule)", marginBottom: "1rem" }} />
+              <p className="body-text" style={{ fontSize: "0.95rem" }}>
+                I keep code organised, write reusable components, and focus on
+                shipping reliable functionality. I value strong fundamentals —
+                data structures, object-oriented design, and clean architecture
+                — and I&apos;m always looking for the most readable, maintainable
+                solution.
+              </p>
+            </motion.div>
+          </div>
+        </AnimatedSection>
+      </section>
+
+      {/* ── Projects ─────────────────────────────────────────────────── */}
+      <section
+        id="projects"
+        className="mx-auto max-w-7xl px-6 py-14"
+        style={{ borderTop: "1px solid var(--rule-light)" }}
+      >
+        <AnimatedSection>
+          <motion.div variants={fadeUp}>
+            <SectionRule label="Featured Work" />
+          </motion.div>
+
+          <motion.h2
+            variants={fadeUp}
+            className="headline-lg mb-10"
+            style={{ fontSize: "clamp(1.6rem, 3vw, 2.4rem)" }}
+          >
+            Selected Projects
+          </motion.h2>
+
+          <div className="grid gap-6 lg:grid-cols-[1.5fr_1fr] lg:gap-8">
+            {/* Lead / featured project */}
+            {projects
+              .filter((p) => p.featured)
+              .map((project) => (
+                <motion.article
+                  key={project.title}
+                  variants={fadeUp}
+                  className="lead-project"
+                >
+                  <p className="eyebrow mb-3">Lead Story · Featured Project</p>
+                  <h3
+                    className="headline-lg mb-3 card-headline transition-colors"
+                    style={{ fontSize: "1.6rem" }}
+                  >
+                    {project.title}
+                  </h3>
+                  <p className="body-text mb-4" style={{ fontSize: "0.95rem" }}>
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-5">
+                    {project.tech.map((t) => (
+                      <TechTag key={t} label={t} />
+                    ))}
+                  </div>
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="github-link"
+                  >
+                    View on GitHub <ArrowUpRight size={12} />
+                  </a>
+                </motion.article>
+              ))}
+
+            {/* Supporting projects */}
+            <div className="flex flex-col">
+              {projects
+                .filter((p) => !p.featured)
+                .map((project, i) => (
+                  <motion.article
+                    key={project.title}
+                    variants={fadeUp}
+                    className="side-project"
+                    style={{
+                      borderTop:
+                        i === 0
+                          ? "2px solid var(--ink)"
+                          : "1px solid var(--rule-light)",
+                      paddingTop: "1.25rem",
+                      paddingBottom: "1.25rem",
+                    }}
+                  >
+                    <p className="eyebrow mb-2">Project</p>
+                    <h3
+                      className="headline-md mb-2 card-headline transition-colors"
+                      style={{ fontSize: "1.15rem" }}
+                    >
+                      {project.title}
+                    </h3>
+                    <p
+                      className="body-text mb-3"
+                      style={{ fontSize: "0.875rem" }}
+                    >
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 mb-3">
+                      {project.tech.map((t) => (
+                        <TechTag key={t} label={t} />
+                      ))}
+                    </div>
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="github-link"
+                    >
+                      GitHub <ArrowUpRight size={11} />
+                    </a>
+                  </motion.article>
+                ))}
+            </div>
+          </div>
+        </AnimatedSection>
+      </section>
+
+      {/* ── Skills ───────────────────────────────────────────────────── */}
+      <section
+        id="skills"
+        className="mx-auto max-w-7xl px-6 py-14"
+        style={{ background: "#fff", borderTop: "1px solid var(--rule-light)" }}
+      >
+        <AnimatedSection>
+          <motion.div variants={fadeUp}>
+            <SectionRule label="Technical Desk" />
+          </motion.div>
+
+          <motion.h2
+            variants={fadeUp}
+            className="headline-lg mb-10"
+            style={{ fontSize: "clamp(1.6rem, 3vw, 2.4rem)" }}
+          >
+            Skills &amp; Technologies
+          </motion.h2>
+
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {skillGroups.map((group) => (
+              <motion.div key={group.category} variants={fadeUp}>
+                <p className="eyebrow mb-3">{group.category}</p>
+                <div>
+                  {group.skills.map((skill) => (
+                    <div key={skill} className="skill-item">
+                      {skill}
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </AnimatedSection>
+      </section>
+
+      {/* ── Journey ──────────────────────────────────────────────────── */}
+      <section
+        id="journey"
+        className="mx-auto max-w-7xl px-6 py-14"
+        style={{ borderTop: "1px solid var(--rule-light)" }}
+      >
+        <AnimatedSection>
+          <motion.div variants={fadeUp}>
+            <SectionRule label="Journey" />
+          </motion.div>
+
+          <motion.h2
+            variants={fadeUp}
+            className="headline-lg mb-8"
+            style={{ fontSize: "clamp(1.6rem, 3vw, 2.4rem)", maxWidth: "520px" }}
+          >
+            Education &amp; Career Direction
+          </motion.h2>
+
+          <div className="mb-12">
+            {timeline.map((item, i) => (
+              <motion.div
+                key={item.year}
+                variants={fadeUp}
+                className="timeline-item"
+                style={{
+                  borderTop: i === 0 ? "2px solid var(--ink)" : undefined,
+                }}
+              >
+                <div>
+                  <p
+                    className="serif font-bold"
+                    style={{ color: "var(--burgundy)", fontSize: "0.9rem" }}
+                  >
+                    {item.year}
+                  </p>
+                </div>
+                <div>
+                  <h3
+                    className="headline-md mb-1"
+                    style={{ fontSize: "1.05rem" }}
+                  >
+                    {item.title}
+                  </h3>
+                  <p className="body-text" style={{ fontSize: "0.875rem" }}>
+                    {item.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Certifications */}
+          <motion.div variants={fadeUp}>
+            <p className="eyebrow mb-4">Certifications &amp; Learning</p>
+            <div
+              className="grid gap-4 sm:grid-cols-2"
+              style={{ borderTop: "2px solid var(--ink)", paddingTop: "1rem" }}
+            >
+              {certifications.map((cert) => (
+                <div
+                  key={cert.title}
+                  className="py-3 border-b"
+                  style={{ borderColor: "var(--rule-light)" }}
+                >
+                  <p
+                    className="font-semibold"
+                    style={{
+                      fontFamily: "var(--font-sans)",
+                      fontSize: "0.875rem",
+                      color: "var(--ink)",
+                    }}
+                  >
+                    {cert.title}
+                  </p>
+                  <p className="meta-text mt-0.5">{cert.org}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </AnimatedSection>
+      </section>
+
+      {/* ── Contact ──────────────────────────────────────────────────── */}
+      <section
+        id="contact"
+        style={{
+          background: "var(--ink)",
+          color: "var(--ivory)",
+        }}
+      >
+        <div className="mx-auto max-w-7xl px-6 py-16">
+          <AnimatedSection>
+            <motion.p variants={fadeUp} className="eyebrow mb-4" style={{ color: "#c9a8b0" }}>
+              Contact
+            </motion.p>
+
+            <motion.h2
+              variants={fadeUp}
+              className="headline-xl mb-4"
+              style={{
+                fontSize: "clamp(1.8rem, 4vw, 3rem)",
+                color: "var(--ivory)",
+                maxWidth: "600px",
+              }}
+            >
+              Have a Project, Opportunity, or Idea?
+            </motion.h2>
+
+            <motion.p
+              variants={fadeUp}
+              className="mb-8"
+              style={{
+                color: "#b0a89e",
+                maxWidth: "480px",
+                fontSize: "1rem",
+                lineHeight: "1.7",
+                fontFamily: "var(--font-sans)",
+              }}
+            >
+              I&apos;m open to entry-level opportunities, meaningful projects, and
+              conversations about software development.
+            </motion.p>
+
+            <motion.div
+              variants={fadeUp}
+              className="flex flex-wrap gap-4 mb-12"
+            >
               <a
                 href="mailto:udaymankar9@gmail.com"
-                className="inline-flex items-center gap-2 transition hover:text-white"
+                className="btn-primary"
+                style={{
+                  background: "var(--ivory)",
+                  color: "var(--ink)",
+                  borderColor: "var(--ivory)",
+                }}
               >
-                <Mail className="h-4 w-4 text-cyan-400" />
-                udaymankar9@gmail.com
+                <Mail size={13} />
+                Email Me
               </a>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noreferrer"
+                download="Uday_Mankar_Resume.pdf"
+                className="btn-outline"
+                style={{
+                  color: "var(--ivory)",
+                  borderColor: "rgba(250,248,244,0.3)",
+                }}
+              >
+                <Download size={13} />
+                Resume
+              </a>
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp}
+              className="flex flex-wrap gap-6 border-t pt-8"
+              style={{ borderColor: "rgba(250,248,244,0.15)" }}
+            >
               <a
                 href="https://github.com/udaymankar"
                 target="_blank"
                 rel="noreferrer"
-                className="transition hover:text-white"
+                className="contact-link"
+                style={{ color: "#b0a89e" }}
               >
-                GitHub
+                GitHub <ArrowUpRight size={11} />
               </a>
               <a
                 href="https://linkedin.com/in/udaymankar"
                 target="_blank"
                 rel="noreferrer"
-                className="transition hover:text-white"
+                className="contact-link"
+                style={{ color: "#b0a89e" }}
               >
-                LinkedIn
+                LinkedIn <ArrowUpRight size={11} />
               </a>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-            className="relative"
-          >
-            <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-cyan-500/20 via-white/5 to-fuchsia-500/20 blur-2xl" />
-            <div className="relative rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur-xl">
-              <div className="grid gap-4 sm:grid-cols-2">
-                <StatCard icon={<Code2 />} label="Core Skills" value="Java + Web" />
-                <StatCard icon={<Server />} label="Projects" value="3+" />
-                <StatCard icon={<Database />} label="Database" value="SQL" />
-                <StatCard icon={<Layers3 />} label="Focus" value="Modern UI" />
-              </div>
-
-              <div className="mt-6 rounded-2xl border border-white/10 bg-[#050816] p-5">
-                <p className="text-sm uppercase tracking-[0.3em] text-cyan-400">
-                  Current Focus
-                </p>
-                <p className="mt-3 text-xl font-semibold leading-8">
-                  Building recruiter-friendly, high-quality projects with clean
-                  design, smooth UX, and strong fundamentals.
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      <section id="about" className="mx-auto max-w-7xl px-6 py-24">
-        <SectionTitle
-          eyebrow="About"
-          title="A professional, modern developer profile"
-          subtitle="I enjoy turning ideas into polished digital products with practical features and a premium visual experience."
-        />
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          className="grid gap-6 lg:grid-cols-3"
-        >
-          <motion.div variants={fadeUp}>
-            <InfoCard
-              title="What I do"
-              text="I build frontend and backend features, solve logic-heavy problems, and make applications feel clean and usable."
-            />
-          </motion.div>
-
-          <motion.div variants={fadeUp}>
-            <InfoCard
-              title="How I work"
-              text="I keep code organized, write reusable components, and focus on shipping reliable functionality with a polished experience."
-            />
-          </motion.div>
-
-          <motion.div variants={fadeUp}>
-            <InfoCard
-              title="What I want"
-              text="An entry-level software role where I can learn fast, contribute to real products, and grow into a strong engineer."
-            />
-          </motion.div>
-        </motion.div>
-      </section>
-
-      <section id="skills" className="mx-auto max-w-7xl px-6 py-24">
-        <SectionTitle
-          eyebrow="Skills"
-          title="Tools and technologies"
-          subtitle="A balanced mix of programming fundamentals, web development, and practical tools."
-        />
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          className="flex flex-wrap gap-3"
-        >
-          {skills.map((skill) => (
-            <motion.span
-              key={skill}
-              variants={fadeUp}
-              whileHover={{ scale: 1.05, y: -2 }}
-              className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-200 transition hover:border-cyan-400/30 hover:bg-cyan-400/10"
-            >
-              {skill}
-            </motion.span>
-          ))}
-        </motion.div>
-      </section>
-
-      <section id="projects" className="mx-auto max-w-7xl px-6 py-24">
-        <SectionTitle
-          eyebrow="Projects"
-          title="Selected work"
-          subtitle="A few projects that show problem solving, practical implementation, and a polished presentation."
-        />
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          className="grid gap-6 lg:grid-cols-3"
-        >
-          {projects.map((project) => (
-            <motion.article
-              key={project.title}
-              variants={fadeUp}
-              whileHover={{ y: -10, scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-              className="group rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition"
-            >
-              <h3 className="text-xl font-semibold">{project.title}</h3>
-              <p className="mt-3 leading-7 text-zinc-300">
-                {project.description}
-              </p>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {project.tech.map((tech) => (
-                  <span
-                    key={tech}
-                    className="rounded-full bg-black/30 px-3 py-1 text-xs text-zinc-300"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-
-              <div className="mt-6">
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-cyan-400 px-4 py-2 text-sm font-semibold text-zinc-950 transition hover:bg-cyan-300"
-                >
-                  View on GitHub
-                  <ArrowUpRight className="h-4 w-4" />
-                </a>
-              </div>
-            </motion.article>
-          ))}
-        </motion.div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-6 py-24">
-        <SectionTitle
-          eyebrow="Journey"
-          title="Education and direction"
-          subtitle="A short timeline that helps recruiters quickly understand your path."
-        />
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          className="space-y-4"
-        >
-          {timeline.map((item) => (
-            <motion.div
-              key={item.year}
-              variants={fadeUp}
-              className="flex flex-col gap-2 rounded-2xl border border-white/10 bg-white/5 p-5 md:flex-row md:items-center md:justify-between"
-            >
-              <div>
-                <p className="text-sm text-cyan-400">{item.year}</p>
-                <h3 className="text-lg font-semibold">{item.title}</h3>
-              </div>
-              <p className="max-w-2xl text-zinc-300">{item.desc}</p>
+              <a
+                href="mailto:udaymankar9@gmail.com"
+                className="contact-link"
+                style={{ color: "#b0a89e" }}
+              >
+                udaymankar9@gmail.com
+              </a>
             </motion.div>
-          ))}
-        </motion.div>
-      </section>
+          </AnimatedSection>
+        </div>
 
-      <section className="mx-auto max-w-7xl px-6 py-24">
-        <SectionTitle
-          eyebrow="Certifications"
-          title="Learning and achievements"
-          subtitle="A compact list of certifications and practical accomplishments."
-        />
-        <div className="grid gap-4 md:grid-cols-2">
-          {certifications.map((item) => (
-            <div
-              key={item}
-              className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 p-5 text-zinc-200"
-            >
-              <CheckCircle2 className="mt-1 h-5 w-5 text-cyan-400" />
-              <span>{item}</span>
-            </div>
-          ))}
+        {/* Footer */}
+        <div
+          className="mx-auto max-w-7xl px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 border-t"
+          style={{ borderColor: "rgba(250,248,244,0.1)" }}
+        >
+          <p
+            className="masthead-wordmark"
+            style={{ fontSize: "1rem", color: "var(--ivory)" }}
+          >
+            UDAY MANKAR
+          </p>
+          <p
+            style={{
+              fontFamily: "var(--font-sans)",
+              fontSize: "0.7rem",
+              color: "#6e6560",
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+            }}
+          >
+            &copy; {new Date().getFullYear()} · Software Engineering · Pune,
+            India
+          </p>
         </div>
       </section>
-
-      <section id="contact" className="mx-auto max-w-7xl px-6 py-24 pb-28">
-        <div className="rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-8 backdrop-blur-xl md:p-12">
-          <SectionTitle
-            eyebrow="Contact"
-            title="Let’s build something great"
-            subtitle="If you're hiring, collaborating, or want to connect, feel free to reach out."
-          />
-          <div className="flex flex-wrap gap-4">
-            <a
-              href="mailto:udaymankar9@gmail.com"
-              className="inline-flex items-center gap-2 rounded-full bg-cyan-400 px-6 py-3 font-semibold text-zinc-950 transition hover:bg-cyan-300"
-            >
-              <Mail className="h-4 w-4" />
-              Email Me
-            </a>
-            <a
-              href="https://github.com/udaymankar"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
-            >
-              GitHub
-            </a>
-            <a
-              href="https://linkedin.com/in/udaymankar"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
-            >
-              LinkedIn
-            </a>
-          </div>
-        </div>
-      </section>
-    </main>
-  );
-}
-
-function StatCard({
-  icon,
-  label,
-  value,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-}) {
-  return (
-    <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-      <div className="flex items-center gap-3 text-cyan-400">
-        <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-400/10">
-          {icon}
-        </span>
-        <div>
-          <p className="text-sm text-zinc-400">{label}</p>
-          <p className="text-lg font-semibold text-white">{value}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function InfoCard({ title, text }: { title: string; text: string }) {
-  return (
-    <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition hover:-translate-y-1 hover:border-cyan-400/20">
-      <h3 className="text-lg font-semibold">{title}</h3>
-      <p className="mt-3 leading-7 text-zinc-300">{text}</p>
     </div>
   );
 }

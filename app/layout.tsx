@@ -1,15 +1,36 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
 import "./globals.css";
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-});
-
 export const metadata: Metadata = {
-  title: "Uday Portfolio",
-  description: "Modern portfolio website built with Next.js",
+  title: "Uday Mankar — Software Engineer · Digital Products",
+  description:
+    "Portfolio of Uday Mankar — Computer Science Engineering graduate specialising in Java, web development, and practical software solutions. Based in Pune, India.",
+  openGraph: {
+    title: "Uday Mankar — Software Engineer",
+    description:
+      "Computer Science Engineering graduate building modern software and web applications. Explore projects, skills, and background.",
+    type: "website",
+    locale: "en_IN",
+    siteName: "Uday Mankar Portfolio",
+  },
+  twitter: {
+    card: "summary",
+    title: "Uday Mankar — Software Engineer",
+    description:
+      "CSE graduate building modern software and web applications. Pune, India.",
+  },
+  keywords: [
+    "Uday Mankar",
+    "software engineer",
+    "web developer",
+    "Java developer",
+    "portfolio",
+    "Pune",
+    "fresher",
+    "entry level",
+    "full stack",
+  ],
+  authors: [{ name: "Uday Mankar" }],
 };
 
 export default function RootLayout({
@@ -19,7 +40,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={poppins.className}>{children}</body>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+      </head>
+      <body>{children}</body>
     </html>
   );
 }
