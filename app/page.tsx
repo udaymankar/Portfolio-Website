@@ -408,6 +408,21 @@ export default function Home() {
               className="lg:border-l lg:pl-8"
               style={{ borderColor: "var(--rule)" }}
             >
+              <figure className="mb-6">
+                <img
+                  src="/Uday%20Passport%20photo%20og.png"
+                  alt="Portrait of Uday Mankar"
+                  className="w-full"
+                  style={{
+                    display: "block",
+                    aspectRatio: "4 / 3",
+                    objectFit: "cover",
+                    objectPosition: "center 38%",
+                    border: "1px solid var(--rule)",
+                  }}
+                />
+                <figcaption className="meta-text mt-2">Uday Mankar · Software Testing &amp; Development</figcaption>
+              </figure>
               <p className="eyebrow mb-4">Today&apos;s Edition</p>
               <div className="space-y-4">
                 {[
@@ -479,7 +494,22 @@ export default function Home() {
             The Person Behind the Code
           </motion.h2>
 
-          <div className="grid gap-10 md:grid-cols-2 md:gap-16">
+          <div className="grid gap-8 md:grid-cols-[0.8fr_1fr_1fr] md:gap-10 lg:gap-14">
+            <motion.figure variants={fadeUp} className="md:sticky md:top-28 md:self-start">
+              <img
+                src="/Uday%20Passport%20photo%20og.png"
+                alt="Uday Mankar in a navy blue suit"
+                className="w-full"
+                style={{
+                  display: "block",
+                  aspectRatio: "4 / 5",
+                  objectFit: "cover",
+                  objectPosition: "center 35%",
+                  border: "1px solid var(--rule)",
+                }}
+              />
+              <figcaption className="meta-text mt-2">A little about the person behind the projects</figcaption>
+            </motion.figure>
             <motion.div variants={fadeUp}>
               <p
                 className="eyebrow mb-3"
