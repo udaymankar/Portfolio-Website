@@ -468,10 +468,11 @@ export default function Home() {
               >
                 <p>
                   I&apos;m Uday Mankar, a Computer Science Engineering graduate
-                  focused on software development, Java, web technologies, and
-                  building practical digital products. I enjoy turning ideas
-                  into reliable applications with thoughtful design and clean
-                  implementation.
+                  focused on both software development and quality assurance.
+                  I build practical web applications with Java and modern web
+                  technologies, and apply manual testing, API validation, and
+                  Selenium automation to help make software reliable. I enjoy
+                  combining clean implementation with thoughtful, systematic testing.
                 </p>
               </motion.div>
 
