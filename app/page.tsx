@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, type Variants, useInView } from "framer-motion";
-import { ArrowUpRight, Download, Mail, MapPin, Menu, PenTool, X } from "lucide-react";
+import { ArrowUpRight, Download, Mail, MapPin, Menu, X } from "lucide-react";
 
 /* ─── Animation variants ─────────────────────────────────────────────── */
 const fadeUp: Variants = {
@@ -290,31 +290,6 @@ function TechTag({ label }: { label: string }) {
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [edition, setEdition] = useState("");
-  const [cursorPosition, setCursorPosition] = useState({ x: -100, y: -100 });
-  const [isCutting, setIsCutting] = useState(false);
-  const [cursorHue, setCursorHue] = useState(350);
-
-  useEffect(() => {
-    if (!window.matchMedia("(pointer: fine)").matches) return;
-    document.body.classList.add("scissor-cursor-enabled");
-    const move = (event: MouseEvent) => {
-      setCursorPosition({ x: event.clientX, y: event.clientY });
-      // Shift through a restrained editorial palette as the pointer moves.
-      setCursorHue((Math.floor((event.clientX + event.clientY) / 90) * 37 + 350) % 360);
-    };
-    const down = () => setIsCutting(true);
-    const up = () => setIsCutting(false);
-    window.addEventListener("mousemove", move);
-    window.addEventListener("mousedown", down);
-    window.addEventListener("mouseup", up);
-    return () => {
-      document.body.classList.remove("scissor-cursor-enabled");
-      window.removeEventListener("mousemove", move);
-      window.removeEventListener("mousedown", down);
-      window.removeEventListener("mouseup", up);
-    };
-  }, []);
-
   useEffect(() => {
     const d = new Date();
     setEdition(
@@ -340,13 +315,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen" style={{ background: "var(--ivory)" }}>
-      <div
-        className={`pen-cursor ${isCutting ? "is-cutting" : ""}`}
-        style={{ left: cursorPosition.x, top: cursorPosition.y, color: `hsl(${cursorHue} 68% 38%)` }}
-        aria-hidden="true"
-      >
-        <PenTool size={31} strokeWidth={2.2} fill="currentColor" />
-      </div>
       {/* ── Mobile Menu ──────────────────────────────────────────────── */}
       <div
         className={`mobile-menu ${menuOpen ? "open" : ""}`}
