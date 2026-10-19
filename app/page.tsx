@@ -956,7 +956,7 @@ function ContactForm() {
     setState("loading");
     try {
       const res = await fetch(
-        "https://formsubmit.co/ajax/udaymankar9@gmail.com",
+        "https://formsubmit.co/ajax/udayamanakar2004@gmail.com",
         {
           method: "POST",
           headers: { "Content-Type": "application/json", Accept: "application/json" },
