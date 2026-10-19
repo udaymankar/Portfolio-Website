@@ -30,26 +30,122 @@ const navLinks = [
 
 const projects = [
   {
-    title: "Java ATM Simulation System",
+    title: "UDAY SearchX",
     description:
-      "A console-based banking simulation featuring secure authentication, deposits, withdrawals, fund transfers, and a complete transaction history engine.",
-    tech: ["Java", "OOP", "Collections", "Serialization"],
-    github: "https://github.com/udaymankar/Java_ATM-Simulation-System",
+      "A web search and discovery application project focused on bringing useful search experiences into one interface.",
+    tech: ["Web Development", "Search UI"],
+    github: "https://github.com/udaymankar/UDAY-SearchX",
     featured: true,
   },
   {
-    title: "Digital Passbook Generator",
+    title: "Digital Time Capsule Collective",
     description:
-      "A financial utility for displaying transaction data in a clean, digital passbook-style web interface.",
-    tech: ["Python", "Django", "HTML", "CSS", "Bootstrap"],
+      "A full-stack platform for creating time-locked messages and media, with countdowns, social features, and an interactive 3D gallery.",
+    tech: ["React", "TypeScript", "Node.js", "MongoDB", "Three.js", "Socket.io"],
+    github: "https://github.com/udaymankar/Digital-time-capsule",
+    featured: false,
+  },
+  {
+    title: "ProFit Supplements",
+    description:
+      "A full-stack supplements e-commerce application with product browsing, filtering, cart and order flows, user accounts, and admin features.",
+    tech: ["Node.js", "Express", "MongoDB", "JavaScript", "Bootstrap"],
+    github: "https://github.com/udaymankar/Pro-fit-Supplements",
+    featured: false,
+  },
+  {
+    title: "UDAY Bank — Digital Passbook",
+    description:
+      "A Java and Spring Boot banking web app with authentication, account dashboard, deposits, withdrawals, and transaction history.",
+    tech: ["Java 17", "Spring Boot", "Spring Security", "JPA", "Thymeleaf", "Maven"],
     github: "https://github.com/udaymankar/Uday-bank-Project",
+    featured: false,
+  },
+  {
+    title: "Java ATM Simulation System",
+    description:
+      "A console-based ATM simulation with card/PIN authentication, account locking, deposits, withdrawals, transfers, and saved transaction history.",
+    tech: ["Java", "OOP", "Collections", "Serialization"],
+    github: "https://github.com/udaymankar/Java_ATM-Simulation-System",
+    featured: false,
+  },
+  {
+    title: "Bank Management System",
+    description:
+      "A Core Java banking application with customer and admin workflows, account management, transactions, and reporting.",
+    tech: ["Java", "OOP", "Collections", "File I/O"],
+    github: "https://github.com/udaymankar/BankManagementSystem",
+    featured: false,
+  },
+  {
+    title: "Student Management System",
+    description:
+      "A console-based student records application supporting CRUD operations, marksheets, grade calculation, search, and academic reports.",
+    tech: ["Java", "OOP", "Collections", "Serialization"],
+    github: "https://github.com/udaymankar/StudentManagementSystem",
+    featured: false,
+  },
+  {
+    title: "Food Delivery App",
+    description:
+      "A responsive React frontend concept with page navigation and reusable components for a food delivery experience.",
+    tech: ["React", "JavaScript", "React Router", "CSS"],
+    github: "https://github.com/udaymankar/Food_Delivery_Web",
+    featured: false,
+  },
+  {
+    title: "App Generator",
+    description:
+      "A config-driven mini app platform designed to generate user interfaces, APIs, and database structure from JSON configuration.",
+    tech: ["React", "Vite", "Node.js", "TypeScript", "PostgreSQL"],
+    github: "https://github.com/udaymankar/app-generator",
+    featured: false,
+  },
+  {
+    title: "Auctioned Car",
+    description:
+      "A repository for an auctioned-car project. Visit the source repository for implementation details and setup instructions.",
+    tech: ["Web Project"],
+    github: "https://github.com/udaymankar/Auctioned-car",
+    featured: false,
+  },
+  {
+    title: "Forest Fire Detection",
+    description:
+      "A deep-learning project exploring forest fire detection using convolutional neural network (CNN) architecture.",
+    tech: ["Python", "Deep Learning", "CNN", "Computer Vision"],
+    github: "https://github.com/udaymankar/Week-1-forest-fire-detection-",
+    featured: false,
+  },
+  {
+    title: "Final Forest Fire Detection",
+    description:
+      "A larger forest-fire detection project repository. Review the repository for model, dataset, and implementation details.",
+    tech: ["Python", "Deep Learning", "Computer Vision"],
+    github: "https://github.com/udaymankar/Final-forest-fire-detection-",
+    featured: false,
+  },
+  {
+    title: "Water Quality Prediction",
+    description:
+      "An AICTE internship project repository focused on water-quality prediction.",
+    tech: ["Python", "Machine Learning", "Data Analysis"],
+    github: "https://github.com/udaymankar/Water-quality-prediction-AICTE-intern",
+    featured: false,
+  },
+  {
+    title: "AICTE Internship — Week 2",
+    description:
+      "A repository containing work from the second week of an AICTE internship. See the source for the exact task and implementation.",
+    tech: ["Internship Project"],
+    github: "https://github.com/udaymankar/Week-2_AICTE_Internship",
     featured: false,
   },
   {
     title: "Portfolio Website",
     description:
-      "A personal portfolio showcasing web development, interface design, and editorial presentation.",
-    tech: ["Next.js", "Tailwind CSS", "Framer Motion"],
+      "This portfolio website, designed as a modern editorial publication to present projects, skills, and professional background.",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
     github: "https://github.com/udaymankar/Portfolio-Website",
     featured: false,
   },
