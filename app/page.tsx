@@ -240,11 +240,35 @@ const timeline = [
 
 const certifications = [
   {
-  { title: "Programming in Java", org: "Infosys Springboard" },
-  { title: "Database and SQL", org: "Infosys Springboard" },
-  { title: "Learn Java Masterclass (Java 17)", org: "Udemy" },
-  { title: "Software Testing", org: "Cyber Success, Pune" },
-  { title: "Campus Ambassador Certification", org: "DevTown" },
+    title: "Web Application Development Internship",
+    org: "iBase Electrosoft LLP",
+    url: "https://drive.google.com/file/d/1AVFIBuGIlxBsRrKrWA9_zN0UpFEZnvKJ/view?usp=sharing",
+  },
+  {
+    title: "Programming in Java",
+    org: "Infosys Springboard",
+    url: "https://drive.google.com/file/d/1xWQNV-KBi0bjE3oeX8AXRbkVKf59rOZt/view?usp=sharing",
+  },
+  {
+    title: "Database and SQL",
+    org: "Infosys Springboard",
+    url: "https://drive.google.com/file/d/1UW1JeUw1L6CL1obUKgFnMhksuouuaVNk/view?usp=sharing",
+  },
+  {
+    title: "Learn Java Masterclass (Java 17)",
+    org: "Udemy",
+    url: "https://drive.google.com/file/d/1BO2-6OsD0NeeaNkfHvWtukjQoSE3bPqu/view?usp=sharing",
+  },
+  {
+    title: "Software Testing",
+    org: "Cyber Success, Pune",
+    url: "https://drive.google.com/file/d/1z26rTh--gvQ9tDYj6Ikj0qTNGXKm4qpo/view",
+  },
+  {
+    title: "Campus Ambassador Certification",
+    org: "DevTown",
+    url: "https://drive.google.com/file/d/13ZLQ6-_IAvfcHvBMhnF0TaRAl3ZNpdKw/view?usp=sharing",
+  },
 ];
 
 /* ─── Helpers ────────────────────────────────────────────────────────── */
@@ -912,16 +936,21 @@ export default function Home() {
                   className="py-3 border-b"
                   style={{ borderColor: "var(--rule-light)" }}
                 >
-                  <p
-                    className="font-semibold"
+                  <a
+                    href={cert.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold underline-offset-4 hover:underline focus-visible:underline"
                     style={{
+                      display: "inline-block",
                       fontFamily: "var(--font-sans)",
                       fontSize: "0.875rem",
                       color: "var(--ink)",
                     }}
+                    aria-label={`Open ${cert.title} PDF in a new tab`}
                   >
-                    {cert.title}
-                  </p>
+                    {cert.title} <span aria-hidden="true">↗</span>
+                  </a>
                   <p className="meta-text mt-0.5">{cert.org}</p>
                 </div>
               ))}
