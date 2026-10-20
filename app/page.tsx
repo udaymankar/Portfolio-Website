@@ -229,7 +229,7 @@ const timeline = [
   {
     year: "TRAINING",
     title: "Software Testing Training",
-    desc: "Cyber Success, Pune — practical learning in software testing and QA fundamentals.",
+    desc: "Cyber Success, Pune — Practical learning in software testing and QA fundamentals.",
   },
   {
     year: "INTERNSHIP",
