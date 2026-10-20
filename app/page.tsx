@@ -491,10 +491,10 @@ export default function Home() {
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.span
                     key={identityVisible ? "full-name" : "initials"}
-                    initial={{ opacity: 0.985 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0.985 }}
-                    transition={{ duration: 0.1, ease: "linear" }}
+                    initial={{ opacity: 0, x: identityVisible ? -8 : 12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: identityVisible ? 12 : -8 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
                     className="masthead-name-transition"
                   >
                     {identityVisible ? "UDAY KISAN MANKAR" : "UKM"}
