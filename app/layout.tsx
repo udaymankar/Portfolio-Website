@@ -3,6 +3,33 @@ import "./globals.css";
 
 const siteUrl = "https://udaymankar.vercel.app";
 
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Uday Kisan Mankar",
+  alternateName: ["Uday Mankar", "UKM"],
+  url: siteUrl,
+  image: `${siteUrl}/icon.svg`,
+  jobTitle: "Software Testing and QA Automation Enthusiast",
+  description:
+    "Computer Science Engineering graduate in Pune, India, focused on software testing, QA automation with Java and Selenium, and web development.",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Pune",
+    addressRegion: "Maharashtra",
+    addressCountry: "IN",
+  },
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "R. V. Parankar College of Engineering & Technology",
+  },
+  sameAs: [
+    "https://github.com/udaymankar",
+    "https://linkedin.com/in/udaymankar",
+  ],
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
@@ -32,7 +59,6 @@ export const metadata: Metadata = {
     title: "Uday Kisan Mankar (Uday Mankar) — Portfolio",
     description:
       "Official portfolio of Uday Kisan Mankar in Pune, India, featuring QA automation, Java, Selenium WebDriver, web development projects, and resume.",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Uday Kisan Mankar portfolio" }],
     type: "website",
     locale: "en_IN",
     siteName: "Uday Mankar Portfolio",
@@ -79,7 +105,13 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c") }}
+        />
+        {children}
+      </body>
     </html>
   );
 }
