@@ -2,7 +2,7 @@
 
 import { Fragment, useState, useEffect, useRef } from "react";
 import { motion, type Variants, useInView } from "framer-motion";
-import { ArrowUpRight, Download, Mail, MapPin, Menu, X } from "lucide-react";
+import { ArrowUp, ArrowUpRight, Download, Mail, MapPin, Menu, X } from "lucide-react";
 
 /* --- Animation variants ----------------------------------------------- */
 const fadeUp: Variants = {
@@ -318,6 +318,7 @@ type TechHeadline = {
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [identityVisible, setIdentityVisible] = useState(true);
+  const [showBackToTop, setShowBackToTop] = useState(false);
   const [headlines, setHeadlines] = useState<TechHeadline[]>([]);
   const [newsLoaded, setNewsLoaded] = useState(false);
   const lastScrollY = useRef(0);
@@ -339,6 +340,7 @@ export default function Home() {
       const currentY = window.scrollY;
       // Switch the contents of the reserved strip, never its height.
       setIdentityVisible(currentY < 48);
+      setShowBackToTop(currentY > 320);
       lastScrollY.current = currentY;
     };
     handleScroll();
@@ -1203,6 +1205,35 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <button
+        type="button"
+        aria-label="Back to top"
+        title="Back to top"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        style={{
+          position: "fixed",
+          right: "1.25rem",
+          bottom: "1.25rem",
+          zIndex: 60,
+          width: "2.75rem",
+          height: "2.75rem",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          border: "1px solid var(--burgundy)",
+          background: "var(--ivory)",
+          color: "var(--burgundy)",
+          boxShadow: "0 3px 12px rgba(0,0,0,0.10)",
+          opacity: showBackToTop ? 1 : 0,
+          visibility: showBackToTop ? "visible" : "hidden",
+          transform: showBackToTop ? "translateY(0)" : "translateY(8px)",
+          transition: "opacity 220ms ease, transform 220ms ease, visibility 220ms ease",
+          cursor: "pointer",
+        }}
+      >
+        <ArrowUp size={18} strokeWidth={1.8} />
+      </button>
     </div>
   );
 }
