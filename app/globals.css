@@ -598,7 +598,7 @@ html {
   height: 100%;
   align-items: center;
   justify-content: flex-start;
-  animation: publication-headline-scroll 78s linear infinite;
+  animation: publication-headline-scroll 95s linear infinite;
   will-change: transform;
 }
 
