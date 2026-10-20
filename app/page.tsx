@@ -836,7 +836,6 @@ export default function Home() {
               </motion.article>
             ))}
           </div>
-          </div>
         </AnimatedSection>
       </section>
 
