@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, type Variants, useInView } from "framer-motion";
-import { ArrowUpRight, Download, Github, Mail, MapPin, Menu, X } from "lucide-react";
+import { ArrowUpRight, Download, Mail, MapPin, Menu, X } from "lucide-react";
 
 /* --- Animation variants ----------------------------------------------- */
 const fadeUp: Variants = {
@@ -891,7 +891,7 @@ export default function Home() {
                     rel="noreferrer"
                     className="github-link"
                   >
-                    <Github size={14} strokeWidth={1.8} aria-hidden="true" /> View on GitHub <ArrowUpRight size={12} />
+                    <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 6v-3.9a3.4 3.4 0 0 0-.9-2.7c3-.3 6.2-1.5 6.2-6.7a5.2 5.2 0 0 0-1.4-3.6 4.8 4.8 0 0 0-.1-3.6s-1.2-.4-3.8 1.4a13.1 13.1 0 0 0-6.9 0C6.5 1.1 5.3 1.5 5.3 1.5a4.8 4.8 0 0 0-.1 3.6 5.2 5.2 0 0 0-1.4 3.6c0 5.2 3.2 6.4 6.2 6.7a3.4 3.4 0 0 0-.9 2.7V22"/></svg> View on GitHub <ArrowUpRight size={12} />
                   </a>
                 </div>
               </motion.article>
