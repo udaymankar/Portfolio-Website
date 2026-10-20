@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, type Variants, useInView } from "framer-motion";
-import { ArrowUpRight, Download, Github, Linkedin, Mail, MapPin, Menu, X } from "lucide-react";
+import { ArrowUpRight, Download, Mail, MapPin, Menu, X } from "lucide-react";
 
 /* --- Animation variants ----------------------------------------------- */
 const fadeUp: Variants = {
@@ -653,7 +653,7 @@ export default function Home() {
                   rel="noreferrer"
                   className="github-link"
                 >
-                  <Github size={14} strokeWidth={1.8} aria-hidden="true" /> GitHub <ArrowUpRight size={11} />
+                  <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="inline-block align-[-2px]"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 6v-3.9a3.4 3.4 0 0 0-.9-2.7c3-.3 6.2-1.5 6.2-6.7a5.2 5.2 0 0 0-1.4-3.6 4.8 4.8 0 0 0-.1-3.6s-1.2-.4-3.8 1.4a13.1 13.1 0 0 0-6.9 0C6.5 1.1 5.3 1.5 5.3 1.5a4.8 4.8 0 0 0-.1 3.6 5.2 5.2 0 0 0-1.4 3.6c0 5.2 3.2 6.4 6.2 6.7a3.4 3.4 0 0 0-.9 2.7V22"/></svg> GitHub <ArrowUpRight size={11} />
                 </a>
                 <a
                   href="https://linkedin.com/in/udaymankar"
@@ -661,7 +661,7 @@ export default function Home() {
                   rel="noreferrer"
                   className="github-link"
                 >
-                  <Linkedin size={14} strokeWidth={1.8} aria-hidden="true" /> LinkedIn <ArrowUpRight size={11} />
+                  <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="inline-block align-[-2px]"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10v7M8 7v.01M12 17v-7m0 3a3 3 0 0 1 6 0v4"/></svg> LinkedIn <ArrowUpRight size={11} />
                 </a>
               </motion.div>
             </motion.div>
