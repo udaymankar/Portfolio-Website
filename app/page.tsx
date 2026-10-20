@@ -3,7 +3,7 @@
 import { Fragment, useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion, type Variants, useInView } from "framer-motion";
 import Lenis from "lenis";
-import { ArrowUp, ArrowUpRight, Download, Mail, MapPin, Menu, X } from "lucide-react";
+import { ArrowUp, ArrowUpRight, Download, Eye, Mail, MapPin, Menu, X } from "lucide-react";
 
 /* --- Animation variants ----------------------------------------------- */
 const fadeUp: Variants = {
@@ -689,11 +689,11 @@ export default function Home() {
                 <a
                   href="/resume.pdf"
                   target="_blank"
-                  rel="noreferrer"
-                  download="Uday_Mankar_Resume.pdf"
+                  rel="noopener noreferrer"
+                  aria-label="Read my resume in a new tab"
                   className="btn-outline"
                 >
-                  <Download size={13} />
+                  <Eye size={13} />
                   Read My Resume
                 </a>
               </motion.div>
