@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, type Variants, useInView } from "framer-motion";
 import { ArrowUpRight, Download, Mail, MapPin, Menu, X } from "lucide-react";
 
-/* ─── Animation variants ─────────────────────────────────────────────── */
+/* --- Animation variants ----------------------------------------------- */
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: {
@@ -19,7 +19,7 @@ const stagger: Variants = {
   visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
 
-/* ─── Data ───────────────────────────────────────────────────────────── */
+/* --- Data ------------------------------------------------------------- */
 const navLinks = [
   { href: "#about", label: "About" },
   { href: "#projects", label: "Projects" },
@@ -271,7 +271,7 @@ const certifications = [
   },
 ];
 
-/* ─── Helpers ────────────────────────────────────────────────────────── */
+/* --- Helpers ---------------------------------------------------------- */
 function AnimatedSection({
   children,
   className = "",
@@ -294,7 +294,7 @@ function AnimatedSection({
   );
 }
 
-/* ─── Components ─────────────────────────────────────────────────────── */
+/* --- Components ------------------------------------------------------- */
 function SectionRule({ label }: { label: string }) {
   return (
     <div className="mb-8 border-t-2 border-[var(--ink)] pt-3">
@@ -307,7 +307,7 @@ function TechTag({ label }: { label: string }) {
   return <span className="tech-tag">{label}</span>;
 }
 
-/* ─── Page ───────────────────────────────────────────────────────────── */
+/* --- Page ------------------------------------------------------------- */
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [identityVisible, setIdentityVisible] = useState(true);
@@ -356,7 +356,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen" style={{ background: "var(--ivory)" }}>
-      {/* ── Mobile Menu ──────────────────────────────────────────────── */}
+      {/* -- Mobile Menu ------------------------------------------------ */}
       <div
         className={`mobile-menu ${menuOpen ? "open" : ""}`}
         aria-hidden={!menuOpen}
@@ -405,7 +405,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ── Header / Masthead ────────────────────────────────────────── */}
+      {/* -- Header / Masthead ------------------------------------------ */}
       <header
         className="sticky top-0 z-50 border-b"
         style={{
@@ -495,7 +495,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* ── Lead Story ───────────────────────────────────────────────── */}
+      {/* -- Lead Story ------------------------------------------------- */}
       <section className="mx-auto max-w-7xl px-6 pt-12 pb-4">
         <div
           className="border-t-2 border-b pt-6 pb-8 mb-0"
@@ -689,7 +689,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── About ────────────────────────────────────────────────────── */}
+      {/* -- About ------------------------------------------------------ */}
       <section id="about" className="mx-auto max-w-7xl px-6 py-14">
         <AnimatedSection>
           <motion.div variants={fadeUp}>
@@ -768,7 +768,7 @@ export default function Home() {
         </AnimatedSection>
       </section>
 
-      {/* ── Projects ─────────────────────────────────────────────────── */}
+      {/* -- Projects --------------------------------------------------- */}
       <section
         id="projects"
         className="mx-auto max-w-7xl px-6 py-14"
@@ -840,7 +840,7 @@ export default function Home() {
         </AnimatedSection>
       </section>
 
-      {/* ── Skills ───────────────────────────────────────────────────── */}
+      {/* -- Skills ----------------------------------------------------- */}
       <section
         id="skills"
         className="mx-auto max-w-7xl px-6 py-14"
@@ -876,7 +876,7 @@ export default function Home() {
         </AnimatedSection>
       </section>
 
-      {/* ── Journey ──────────────────────────────────────────────────── */}
+      {/* -- Journey ---------------------------------------------------- */}
       <section
         id="journey"
         className="mx-auto max-w-7xl px-6 py-14"
@@ -964,7 +964,7 @@ export default function Home() {
         </AnimatedSection>
       </section>
 
-      {/* ── Contact ──────────────────────────────────────────────────── */}
+      {/* -- Contact ---------------------------------------------------- */}
       <section
         id="contact"
         style={{
@@ -1146,7 +1146,7 @@ export default function Home() {
   );
 }
 
-/* ─── ContactForm component ──────────────────────────────────────────── */
+/* --- ContactForm component -------------------------------------------- */
 type FormState = "idle" | "loading" | "success" | "error";
 
 function ContactForm() {
