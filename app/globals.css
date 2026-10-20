@@ -337,7 +337,7 @@ body {
 .mobile-nav-link:hover { color: var(--burgundy); }
 
 /* ─── Section anchors ────────────────────────────────────────────────── */
-section { scroll-margin-top: 4.5rem; }
+section { scroll-margin-top: 10rem; }
 
 /* ─── Focus / a11y ───────────────────────────────────────────────────── */
 *:focus-visible {
@@ -411,7 +411,7 @@ img, svg {
   }
 
   section[id] {
-    scroll-margin-top: 7rem;
+    scroll-margin-top: 8rem;
   }
 }
 
