@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, type Variants, useInView } from "framer-motion";
-import { ArrowUpRight, Download, Mail, MapPin, Menu, X } from "lucide-react";
+import { ArrowUpRight, Download, Github, Linkedin, Mail, MapPin, Menu, X } from "lucide-react";
 
 /* --- Animation variants ----------------------------------------------- */
 const fadeUp: Variants = {
@@ -653,7 +653,7 @@ export default function Home() {
                   rel="noreferrer"
                   className="github-link"
                 >
-                  GitHub <ArrowUpRight size={11} />
+                  <Github size={14} strokeWidth={1.8} aria-hidden="true" /> GitHub <ArrowUpRight size={11} />
                 </a>
                 <a
                   href="https://linkedin.com/in/udaymankar"
@@ -661,7 +661,7 @@ export default function Home() {
                   rel="noreferrer"
                   className="github-link"
                 >
-                  LinkedIn <ArrowUpRight size={11} />
+                  <Linkedin size={14} strokeWidth={1.8} aria-hidden="true" /> LinkedIn <ArrowUpRight size={11} />
                 </a>
               </motion.div>
             </motion.div>
@@ -1103,7 +1103,7 @@ export default function Home() {
                           className="contact-link"
                           style={{ color: "var(--ivory)", fontSize: "0.9rem" }}
                         >
-                          github.com/udaymankar <ArrowUpRight size={11} />
+                          <Github size={14} strokeWidth={1.8} aria-hidden="true" /> github.com/udaymankar <ArrowUpRight size={11} />
                         </a>
                       ),
                     },
@@ -1117,7 +1117,7 @@ export default function Home() {
                           className="contact-link"
                           style={{ color: "var(--ivory)", fontSize: "0.9rem" }}
                         >
-                          linkedin.com/in/udaymankar <ArrowUpRight size={11} />
+                          <Linkedin size={14} strokeWidth={1.8} aria-hidden="true" /> linkedin.com/in/udaymankar <ArrowUpRight size={11} />
                         </a>
                       ),
                     },
