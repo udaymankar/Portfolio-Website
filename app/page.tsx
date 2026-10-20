@@ -1149,11 +1149,19 @@ export default function Home() {
                   ))}
                 </div>
 
-                <div className="mt-8">
+                <div className="mt-8 flex flex-wrap items-center gap-3">
                   <a
                     href="/resume.pdf"
                     target="_blank"
                     rel="noreferrer"
+                    className="btn-outline"
+                    style={{ color: "var(--ivory)", borderColor: "rgba(250,248,244,0.3)" }}
+                  >
+                    <ArrowUpRight size={13} />
+                    View Resume
+                  </a>
+                  <a
+                    href="/resume.pdf"
                     download="Uday_Mankar_Resume.pdf"
                     className="btn-outline"
                     style={{ color: "var(--ivory)", borderColor: "rgba(250,248,244,0.3)" }}
