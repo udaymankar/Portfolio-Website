@@ -691,11 +691,13 @@ html {
 /* Keep the burgundy diamond separator optically centered in the news ticker. */
 .publication-news-diamond {
   display: inline-flex;
+  flex: 0 0 1.2rem;
   align-items: center;
   justify-content: center;
   align-self: center;
   line-height: 1;
   font-size: 0.58rem;
-  margin-inline: 0.15rem;
+  color: var(--burgundy);
+  margin-inline: 0.35rem;
   transform: translateY(-0.02em);
 }
