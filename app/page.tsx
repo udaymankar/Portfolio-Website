@@ -1,7 +1,7 @@
 "use client";
 
 import { Fragment, useState, useEffect, useRef } from "react";
-import { motion, type Variants, useInView } from "framer-motion";
+import { AnimatePresence, motion, type Variants, useInView } from "framer-motion";
 import Lenis from "lenis";
 import { ArrowUp, ArrowUpRight, Download, Mail, MapPin, Menu, X } from "lucide-react";
 
@@ -483,10 +483,25 @@ export default function Home() {
         {/* Main masthead row */}
         <div className="mx-auto max-w-7xl px-6 py-4">
           <div className="flex items-center justify-between">
-            <a href="#" aria-label="Home">
-              <h1 className="masthead-wordmark text-3xl sm:text-4xl md:text-5xl">
-                UDAY KISAN MANKAR
-              </h1>
+            <a href="#" aria-label="Home" className="masthead-home-link">
+              <motion.h1
+                layout
+                className="masthead-wordmark text-3xl sm:text-4xl md:text-5xl"
+                aria-label="Uday Kisan Mankar"
+              >
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.span
+                    key={identityVisible ? "full-name" : "initials"}
+                    initial={{ opacity: 0, y: 8, filter: "blur(3px)" }}
+                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, y: -6, filter: "blur(2px)" }}
+                    transition={{ duration: 0.28, ease: "easeOut" }}
+                    className="masthead-name-transition"
+                  >
+                    {identityVisible ? "UDAY KISAN MANKAR" : "UKM"}
+                  </motion.span>
+                </AnimatePresence>
+              </motion.h1>
             </a>
 
             {/* Desktop nav */}
