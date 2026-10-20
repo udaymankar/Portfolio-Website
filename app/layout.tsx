@@ -3,6 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Uday Mankar — Software Engineer · Digital Products",
+  icons: { icon: [{ url: "/icon.svg?v=2", type: "image/svg+xml" }] },
   description:
     "Portfolio of Uday Mankar — Computer Science Engineering graduate specialising in Java, web development, and practical software solutions. Based in Pune, India.",
   openGraph: {
