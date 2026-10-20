@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { Fragment, useState, useEffect, useRef } from "react";
 import { motion, type Variants, useInView } from "framer-motion";
 import { ArrowUpRight, Download, Mail, MapPin, Menu, X } from "lucide-react";
 
@@ -520,18 +520,19 @@ export default function Home() {
                     {[0, 1].map((copy) => (
                       <div className="publication-marquee__group" key={copy} aria-hidden={copy === 1}>
                         {headlines.map((headline, index) => (
-                          <a
-                            className="publication-marquee__item"
-                            href={headline.url}
-                            target="_blank"
-                            rel="noreferrer"
-                            key={`${copy}-${headline.url}`}
-                            tabIndex={identityVisible || copy === 1 ? -1 : 0}
-                          >
-                            <span className="publication-headline-source">{headline.source}</span>
-                            <span>{headline.title}</span>
-                            <span className="publication-dot publication-news-diamond" aria-hidden="true">◆</span>
-                          </a>
+                          <Fragment key={`${copy}-${headline.url}`}>
+                            <a
+                              className="publication-marquee__item"
+                              href={headline.url}
+                              target="_blank"
+                              rel="noreferrer"
+                              tabIndex={identityVisible || copy === 1 ? -1 : 0}
+                            >
+                              <span className="publication-headline-source">{headline.source}</span>
+                              <span>{headline.title}</span>
+                            </a>
+                            <span className="publication-news-diamond" aria-hidden="true">◆</span>
+                          </Fragment>
                         ))}
                       </div>
                     ))}
