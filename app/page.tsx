@@ -224,7 +224,7 @@ const timeline = [
   {
     year: "HIGHER EDUCATION",
     title: "B.Tech, Computer Science Engineering",
-    desc: "Sant Gadge Baba Amravati University — Computer Science Engineering.",
+    desc: "Rashtrasant Tukadoji Maharaj Nagpur University — Computer Science Engineering.",
   },
   {
     year: "TRAINING",
