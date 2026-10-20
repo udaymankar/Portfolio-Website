@@ -2,6 +2,7 @@
 
 import { Fragment, useState, useEffect, useRef } from "react";
 import { motion, type Variants, useInView } from "framer-motion";
+import Lenis from "lenis";
 import { ArrowUp, ArrowUpRight, Download, Mail, MapPin, Menu, X } from "lucide-react";
 
 /* --- Animation variants ----------------------------------------------- */
@@ -323,6 +324,22 @@ export default function Home() {
   const [newsLoaded, setNewsLoaded] = useState(false);
   const lastScrollY = useRef(0);
   const [edition, setEdition] = useState("");
+
+  // Smooth, momentum-based scrolling across the page. Respect reduced-motion preferences.
+  useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) return;
+
+    const lenis = new Lenis({
+      autoRaf: true,
+      lerp: 0.09,
+      wheelMultiplier: 1,
+      smoothWheel: true,
+      anchors: true,
+    });
+
+    return () => lenis.destroy();
+  }, []);
   useEffect(() => {
     const d = new Date();
     setEdition(
