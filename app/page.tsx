@@ -234,7 +234,7 @@ const timeline = [
   {
     year: "INTERNSHIP",
     title: "Web Application Development Internship",
-    desc: "iBase Electrosoft LLP — internship focused on web application development.",
+    desc: "iBase Electrosoft LLP — Internship focused on web application development.",
   },
 ];
 
