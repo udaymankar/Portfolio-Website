@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, type Variants, useInView } from "framer-motion";
-import { ArrowUpRight, Download, Github, Linkedin, Mail, MapPin, Menu, X } from "lucide-react";
+import { ArrowUpRight, Download, Mail, MapPin, Menu, X } from "lucide-react";
 
 /* --- Animation variants ----------------------------------------------- */
 const fadeUp: Variants = {
@@ -1103,7 +1103,7 @@ export default function Home() {
                           className="contact-link"
                           style={{ color: "var(--ivory)", fontSize: "0.9rem" }}
                         >
-                          <Github size={14} strokeWidth={1.8} aria-hidden="true" /> github.com/udaymankar <ArrowUpRight size={11} />
+                          <span aria-hidden="true" className="platform-mark">GH</span> github.com/udaymankar <ArrowUpRight size={11} />
                         </a>
                       ),
                     },
@@ -1117,7 +1117,7 @@ export default function Home() {
                           className="contact-link"
                           style={{ color: "var(--ivory)", fontSize: "0.9rem" }}
                         >
-                          <Linkedin size={14} strokeWidth={1.8} aria-hidden="true" /> linkedin.com/in/udaymankar <ArrowUpRight size={11} />
+                          <span aria-hidden="true" className="platform-mark">in</span> linkedin.com/in/udaymankar <ArrowUpRight size={11} />
                         </a>
                       ),
                     },
