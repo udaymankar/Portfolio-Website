@@ -487,9 +487,6 @@ export default function Home() {
           >
             <div className="publication-marquee__track">
               <span className="publication-marquee__item">The Uday Times <span aria-hidden="true">·</span> Pune, India</span>
-              <span className="publication-marquee__item" aria-hidden="true">The Uday Times <span>·</span> Pune, India</span>
-              <span className="publication-marquee__item" aria-hidden="true">The Uday Times <span>·</span> Pune, India</span>
-              <span className="publication-marquee__item" aria-hidden="true">The Uday Times <span>·</span> Pune, India</span>
             </div>
           </div>
         </div>
