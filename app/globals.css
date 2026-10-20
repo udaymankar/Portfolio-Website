@@ -723,3 +723,22 @@ html {
   margin-inline: 0.35rem;
   transform: translateY(-0.02em);
 }
+
+
+/* Smoothly transition the masthead from the full name to UKM while scrolling. */
+.masthead-home-link {
+  display: block;
+  min-width: 0;
+  text-decoration: none;
+}
+
+.masthead-name-transition {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .masthead-name-transition {
+    transition: none !important;
+  }
+}
