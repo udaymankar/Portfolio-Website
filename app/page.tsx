@@ -787,31 +787,43 @@ export default function Home() {
             Selected Projects
           </motion.h2>
 
-          <div className="grid gap-6 lg:grid-cols-[1.5fr_1fr] lg:gap-8">
-            {/* Lead / featured project */}
-            {projects
-              .filter((p) => p.featured)
-              .map((project) => (
-                <motion.article
-                  key={project.title}
-                  variants={fadeUp}
-                  className="lead-project"
-                >
-                  <p className="eyebrow mb-3">Lead Story · Featured Project</p>
-                  <h3
-                    className="headline-lg mb-3 card-headline transition-colors"
-                    style={{ fontSize: "1.6rem" }}
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:gap-6">
+            {projects.map((project, i) => (
+              <motion.article
+                key={project.title}
+                variants={fadeUp}
+                className="flex h-full flex-col border bg-white/70 p-6 sm:p-7"
+                style={{
+                  borderColor: "var(--rule-light)",
+                  borderTop: project.featured
+                    ? "3px solid var(--burgundy)"
+                    : "2px solid var(--ink)",
+                }}
+              >
+                <div className="mb-3 flex items-center justify-between gap-3">
+                  <p className="eyebrow">{project.featured ? "Featured Project" : "Project"}</p>
+                  <span
+                    className="text-xs tracking-widest"
+                    style={{ color: "var(--muted)" }}
                   >
-                    {project.title}
-                  </h3>
-                  <p className="body-text mb-4" style={{ fontSize: "0.95rem" }}>
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-5">
-                    {project.tech.map((t) => (
-                      <TechTag key={t} label={t} />
-                    ))}
-                  </div>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <h3
+                  className="headline-md mb-3 card-headline transition-colors"
+                  style={{ fontSize: "clamp(1.15rem, 1.7vw, 1.45rem)" }}
+                >
+                  {project.title}
+                </h3>
+                <p className="body-text mb-5" style={{ fontSize: "0.9rem" }}>
+                  {project.description}
+                </p>
+                <div className="mb-5 flex flex-wrap gap-2">
+                  {project.tech.map((t) => (
+                    <TechTag key={t} label={t} />
+                  ))}
+                </div>
+                <div className="mt-auto pt-2">
                   <a
                     href={project.github}
                     target="_blank"
@@ -820,56 +832,10 @@ export default function Home() {
                   >
                     View on GitHub <ArrowUpRight size={12} />
                   </a>
-                </motion.article>
-              ))}
-
-            {/* Supporting projects */}
-            <div className="flex flex-col">
-              {projects
-                .filter((p) => !p.featured)
-                .map((project, i) => (
-                  <motion.article
-                    key={project.title}
-                    variants={fadeUp}
-                    className="side-project"
-                    style={{
-                      borderTop:
-                        i === 0
-                          ? "2px solid var(--ink)"
-                          : "1px solid var(--rule-light)",
-                      paddingTop: "1.25rem",
-                      paddingBottom: "1.25rem",
-                    }}
-                  >
-                    <p className="eyebrow mb-2">Project</p>
-                    <h3
-                      className="headline-md mb-2 card-headline transition-colors"
-                      style={{ fontSize: "1.15rem" }}
-                    >
-                      {project.title}
-                    </h3>
-                    <p
-                      className="body-text mb-3"
-                      style={{ fontSize: "0.875rem" }}
-                    >
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-1.5 mb-3">
-                      {project.tech.map((t) => (
-                        <TechTag key={t} label={t} />
-                      ))}
-                    </div>
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="github-link"
-                    >
-                      GitHub <ArrowUpRight size={11} />
-                    </a>
-                  </motion.article>
-                ))}
-            </div>
+                </div>
+              </motion.article>
+            ))}
+          </div>
           </div>
         </AnimatedSection>
       </section>
