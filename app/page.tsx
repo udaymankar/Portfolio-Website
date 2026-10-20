@@ -31,7 +31,7 @@ const navLinks = [
 
 const projects = [
   {
-    title: "AI Testing Platform — Selenium Automation Framework",
+    title: "TestPilot AI",
     description:
       "A web-based testing platform concept for running browser automation against websites, built around a Selenium framework with Java. Review the repository for current implementation and setup details.",
     tech: ["Java", "Selenium WebDriver", "Maven", "Web Automation"],
