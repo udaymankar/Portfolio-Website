@@ -344,7 +344,7 @@ export default function Home() {
       wheelMultiplier: 1,
       smoothWheel: true,
       // Leave enough room for the sticky masthead and live news strip.
-      anchors: { offset: window.innerWidth < 768 ? -125 : -155 },
+      anchors: { offset: window.innerWidth < 768 ? -64 : -76 },
     });
 
     return () => lenis.destroy();
