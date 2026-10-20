@@ -468,25 +468,19 @@ export default function Home() {
 
         {/* Centered publication identity beneath the name */}
         <div
-          className="border-t px-4 py-2.5 text-center"
-          style={{
-            borderColor: "var(--rule-light)",
-            transform: identityVisible ? "translateY(0)" : "translateY(-100%)",
-            opacity: identityVisible ? 1 : 0,
-            maxHeight: identityVisible ? "48px" : "0px",
-            paddingTop: identityVisible ? undefined : 0,
-            paddingBottom: identityVisible ? undefined : 0,
-            overflow: "hidden",
-            transition: "transform 320ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease, max-height 320ms ease, padding 320ms ease",
-          }}
+          className={`publication-identity-strip border-t text-center ${identityVisible ? "is-visible" : "is-hidden"}`}
+          style={{ borderColor: "var(--rule-light)" }}
+          aria-hidden={!identityVisible}
         >
-          <div
-            className="publication-marquee"
-            role="region"
-            aria-label="The Uday Times, Pune, India"
-          >
-            <div className="publication-marquee__track">
-              <span className="publication-marquee__item">The Uday Times <span aria-hidden="true">·</span> Pune, India</span>
+          <div className="publication-identity-strip__inner px-4 py-2.5">
+            <div
+              className="publication-marquee"
+              role="region"
+              aria-label="The Uday Times, Pune, India"
+            >
+              <div className="publication-marquee__track">
+                <span className="publication-marquee__item">The Uday Times <span aria-hidden="true">·</span> Pune, India</span>
+              </div>
             </div>
           </div>
         </div>
