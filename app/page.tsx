@@ -482,10 +482,9 @@ export default function Home() {
 
         {/* Main masthead row */}
         <div className="mx-auto max-w-7xl px-6 py-4">
-          <div className="flex items-center justify-between">
+          <div className="masthead-main-row">
             <a href="#" aria-label="Home" className="masthead-home-link">
               <motion.h1
-                layout
                 className="masthead-wordmark text-3xl sm:text-4xl md:text-5xl"
                 aria-label="Uday Kisan Mankar"
               >
