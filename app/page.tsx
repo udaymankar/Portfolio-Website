@@ -729,7 +729,6 @@ export default function Home() {
                   objectPosition: "center 35%",
                   border: "1px solid var(--rule)",
                   userSelect: "none",
-                  WebkitUserDrag: "none",
                   WebkitTouchCallout: "none",
                 }}
               />
