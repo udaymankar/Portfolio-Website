@@ -485,29 +485,27 @@ footer {
 }
 
 
-/* ─── Publication ticker ─────────────────────────────────────────────── */
+/* ─── Publication strip ──────────────────────────────────────────────── */
 .publication-marquee {
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+  text-align: center;
 }
 
 .publication-marquee__track {
   display: flex;
-  width: max-content;
+  width: 100%;
   align-items: center;
-  animation: publication-marquee-left 20s linear infinite;
-  will-change: transform;
+  justify-content: center;
 }
 
 .publication-marquee__item {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.6rem;
-  padding-inline: 3.25rem;
-  flex: 0 0 auto;
+  padding-inline: 1rem;
   font-family: var(--font-sans);
   font-size: 0.75rem;
   font-weight: 400;
@@ -517,19 +515,4 @@ footer {
 
 .publication-marquee__item span {
   color: var(--burgundy);
-}
-
-@keyframes publication-marquee-left {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-.publication-marquee:hover .publication-marquee__track {
-  animation-play-state: paused;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .publication-marquee__track { animation: none; }
-  .publication-marquee__item:not(:first-child) { display: none; }
-  .publication-marquee { -webkit-mask-image: none; mask-image: none; }
 }
