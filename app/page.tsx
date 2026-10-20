@@ -31,12 +31,20 @@ const navLinks = [
 
 const projects = [
   {
+    title: "AI Testing Platform — Selenium Automation Framework",
+    description:
+      "A web-based testing platform concept for running browser automation against websites, built around a Selenium framework with Java. Review the repository for current implementation and setup details.",
+    tech: ["Java", "Selenium WebDriver", "Maven", "Web Automation"],
+    github: "https://github.com/udaymankar/ai-testing-platform",
+    featured: true,
+  },
+  {
     title: "UDAY SearchX",
     description:
       "A web search and discovery application project focused on bringing useful search experiences into one interface.",
     tech: ["Web Development", "Search UI"],
     github: "https://github.com/udaymankar/UDAY-SearchX",
-    featured: true,
+    featured: false,
   },
   {
     title: "Digital Time Capsule Collective",
