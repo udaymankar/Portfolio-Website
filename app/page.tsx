@@ -637,8 +637,7 @@ export default function Home() {
                     objectPosition: "center 38%",
                     border: "1px solid var(--rule)",
                     userSelect: "none",
-                    WebkitUserDrag: "none",
-                    WebkitTouchCallout: "none",
+                          WebkitTouchCallout: "none",
                   }}
                 />
                 <figcaption className="meta-text mt-2">Uday Mankar · Software Testing &amp; Development</figcaption>
