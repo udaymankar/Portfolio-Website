@@ -498,7 +498,7 @@ footer {
   display: flex;
   width: max-content;
   align-items: center;
-  animation: publication-marquee-right 34s linear infinite;
+  animation: publication-marquee-left 20s linear infinite;
   will-change: transform;
 }
 
@@ -519,9 +519,9 @@ footer {
   color: var(--burgundy);
 }
 
-@keyframes publication-marquee-right {
-  from { transform: translateX(-25%); }
-  to { transform: translateX(0); }
+@keyframes publication-marquee-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 .publication-marquee:hover .publication-marquee__track {
