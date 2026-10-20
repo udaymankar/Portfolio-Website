@@ -488,18 +488,29 @@ export default function Home() {
                 className="masthead-wordmark text-3xl sm:text-4xl md:text-5xl"
                 aria-label="Uday Kisan Mankar"
               >
-                <AnimatePresence mode="wait" initial={false}>
+                <span className="masthead-name-parts" aria-hidden="true">
                   <motion.span
-                    key={identityVisible ? "full-name" : "initials"}
-                    initial={{ opacity: 0, x: identityVisible ? -8 : 12 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: identityVisible ? 12 : -8 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                    className="masthead-name-transition"
+                    layout="position"
+                    transition={{ layout: { duration: 0.38, ease: [0.22, 1, 0.36, 1] } }}
+                    className="masthead-name-part"
                   >
-                    {identityVisible ? "UDAY KISAN MANKAR" : "UKM"}
+                    {identityVisible ? "UDAY" : "U"}
                   </motion.span>
-                </AnimatePresence>
+                  <motion.span
+                    layout="position"
+                    transition={{ layout: { duration: 0.38, ease: [0.22, 1, 0.36, 1] } }}
+                    className="masthead-name-part"
+                  >
+                    {identityVisible ? "KISAN" : "K"}
+                  </motion.span>
+                  <motion.span
+                    layout="position"
+                    transition={{ layout: { duration: 0.38, ease: [0.22, 1, 0.36, 1] } }}
+                    className="masthead-name-part"
+                  >
+                    {identityVisible ? "MANKAR" : "M"}
+                  </motion.span>
+                </span>
               </motion.h1>
             </a>
 
