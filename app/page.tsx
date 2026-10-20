@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, type Variants, useInView } from "framer-motion";
-import { ArrowUpRight, Download, Mail, MapPin, Menu, X } from "lucide-react";
+import { ArrowUpRight, Download, Github, Linkedin, Mail, MapPin, Menu, X } from "lucide-react";
 
 /* --- Animation variants ----------------------------------------------- */
 const fadeUp: Variants = {
