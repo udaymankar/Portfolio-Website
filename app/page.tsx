@@ -1103,7 +1103,7 @@ export default function Home() {
                           className="contact-link"
                           style={{ color: "var(--ivory)", fontSize: "0.9rem" }}
                         >
-                          <span aria-hidden="true" className="platform-mark">GH</span> github.com/udaymankar <ArrowUpRight size={11} />
+                          github.com/udaymankar <ArrowUpRight size={11} />
                         </a>
                       ),
                     },
@@ -1117,7 +1117,7 @@ export default function Home() {
                           className="contact-link"
                           style={{ color: "var(--ivory)", fontSize: "0.9rem" }}
                         >
-                          <span aria-hidden="true" className="platform-mark">in</span> linkedin.com/in/udaymankar <ArrowUpRight size={11} />
+                          linkedin.com/in/udaymankar <ArrowUpRight size={11} />
                         </a>
                       ),
                     },
