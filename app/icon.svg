@@ -1,9 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="7" fill="#000"/>
-  <path d="M8 22 14 35 19 27 25 35 31 13 37 35 43 27 49 35 56 22 49 44Q32 35 15 44Z" fill="#fff"/>
-  <path d="M32 13 37 35 43 27 49 35 56 22 49 44Q41 39 32 39Z" fill="#ffdc00"/>
-  <circle cx="8" cy="18" r="3" fill="#fff"/><circle cx="19" cy="15" r="3" fill="#fff"/>
-  <circle cx="32" cy="7" r="3.5" fill="#fff"/><path d="M32 3.5A3.5 3.5 0 0 1 32 10Z" fill="#ffdc00"/>
-  <circle cx="45" cy="15" r="3" fill="#ffdc00"/><circle cx="56" cy="18" r="3" fill="#ffdc00"/>
-  <path d="M17 43H28V58L17 54Z" fill="#fff"/><path d="M33 43H46L41 50 46 56 33 61Z" fill="#ffdc00"/>
+  <rect width="64" height="64" rx="8" fill="#fff"/>
+  <circle cx="32" cy="32" r="27" fill="none" stroke="#080808" stroke-width="3.8" stroke-dasharray="157 13" stroke-dashoffset="6" transform="rotate(-38 32 32)"/>
+  <path d="M19 19V36.5C19 47 32 47 32 36.5V19" fill="none" stroke="#080808" stroke-width="4.2" stroke-linecap="square" stroke-linejoin="round"/>
+  <path d="M35 44V19L44 34L53 19V44" fill="none" stroke="#080808" stroke-width="4.2" stroke-linecap="square" stroke-linejoin="miter"/>
 </svg>
