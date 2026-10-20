@@ -307,10 +307,19 @@ function TechTag({ label }: { label: string }) {
   return <span className="tech-tag">{label}</span>;
 }
 
+type TechHeadline = {
+  title: string;
+  url: string;
+  source: string;
+  publishedAt: string | null;
+};
+
 /* --- Page ------------------------------------------------------------- */
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [identityVisible, setIdentityVisible] = useState(true);
+  const [headlines, setHeadlines] = useState<TechHeadline[]>([]);
+  const [newsLoaded, setNewsLoaded] = useState(false);
   const lastScrollY = useRef(0);
   const [edition, setEdition] = useState("");
   useEffect(() => {
@@ -328,18 +337,35 @@ export default function Home() {
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY;
-      const scrollingDown = currentY > lastScrollY.current;
-      // Hide only the publication identity strip on downward scroll;
-      // keep the full masthead and navigation visible.
-      if (currentY < 48 || !scrollingDown) {
-        setIdentityVisible(true);
-      } else if (currentY > lastScrollY.current + 4) {
-        setIdentityVisible(false);
-      }
+      // Switch the contents of the reserved strip, never its height.
+      setIdentityVisible(currentY < 48);
       lastScrollY.current = currentY;
     };
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    const refreshHeadlines = async () => {
+      try {
+        const response = await fetch("/api/tech-news", { cache: "no-store" });
+        if (!response.ok) throw new Error("Could not load technology news");
+        const data = (await response.json()) as { headlines?: TechHeadline[] };
+        if (!cancelled) setHeadlines(Array.isArray(data.headlines) ? data.headlines : []);
+      } catch {
+        if (!cancelled) setHeadlines([]);
+      } finally {
+        if (!cancelled) setNewsLoaded(true);
+      }
+    };
+    refreshHeadlines();
+    const refreshTimer = window.setInterval(refreshHeadlines, 15 * 60 * 1000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(refreshTimer);
+    };
   }, []);
 
   useEffect(() => {
@@ -466,20 +492,55 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Centered publication identity beneath the name */}
+        {/* Identity at the top; live technology headlines while scrolling */}
         <div
-          className={`publication-identity-strip border-t text-center ${identityVisible ? "is-visible" : "is-hidden"}`}
+          className={`publication-identity-strip border-t ${identityVisible ? "is-identity" : "is-news"}`}
           style={{ borderColor: "var(--rule-light)" }}
-          aria-hidden={!identityVisible}
         >
-          <div className="publication-identity-strip__inner px-4 py-2.5">
+          <div className="publication-identity-strip__inner">
             <div
-              className="publication-marquee"
-              role="region"
-              aria-label="The Uday Times, Pune, India"
+              className="publication-identity-copy"
+              aria-hidden={!identityVisible}
             >
-              <div className="publication-marquee__track">
-                <span className="publication-marquee__item">The Uday Times <span aria-hidden="true">·</span> Pune, India</span>
+              <span>The Uday Times</span>
+              <span className="publication-dot" aria-hidden="true">·</span>
+              <span>Pune, India</span>
+            </div>
+
+            <div
+              className="publication-news-ticker"
+              role="region"
+              aria-label="Latest technology news"
+              aria-hidden={identityVisible}
+            >
+              <span className="publication-news-label">TECH BRIEF</span>
+              <div className="publication-marquee">
+                {headlines.length > 0 ? (
+                  <div className="publication-marquee__track">
+                    {[0, 1].map((copy) => (
+                      <div className="publication-marquee__group" key={copy} aria-hidden={copy === 1}>
+                        {headlines.map((headline, index) => (
+                          <a
+                            className="publication-marquee__item"
+                            href={headline.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            key={`${copy}-${headline.url}`}
+                            tabIndex={identityVisible || copy === 1 ? -1 : 0}
+                          >
+                            <span className="publication-headline-source">{headline.source}</span>
+                            <span>{headline.title}</span>
+                            <span className="publication-dot" aria-hidden="true">◆</span>
+                          </a>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <span className="publication-news-status">
+                    {newsLoaded ? "Technology headlines temporarily unavailable" : "Loading latest technology headlines…"}
+                  </span>
+                )}
               </div>
             </div>
           </div>
