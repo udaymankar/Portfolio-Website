@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-export const revalidate = 900;
+export const revalidate = 21600; // Refresh live RSS headlines every 6 hours.
 
 type Headline = {
   title: string;
@@ -58,7 +58,7 @@ export async function GET() {
     FEEDS.map(async ({ url, source }) => {
       const response = await fetch(url, {
         headers: { "User-Agent": "TheUdayTimes/1.0 (technology headlines reader)" },
-        next: { revalidate: 900 },
+        next: { revalidate: 21600 },
         signal: AbortSignal.timeout(7000),
       });
       if (!response.ok) throw new Error(`Feed unavailable: ${source}`);
@@ -78,6 +78,6 @@ export async function GET() {
 
   return NextResponse.json(
     { headlines, updatedAt: new Date().toISOString(), available: headlines.length > 0 },
-    { headers: { "Cache-Control": "public, s-maxage=900, stale-while-revalidate=3600" } },
+    { headers: { "Cache-Control": "public, s-maxage=21600, stale-while-revalidate=3600" } },
   );
 }
