@@ -423,6 +423,28 @@ img, svg {
   }
 }
 
+/* ─── Lenis smooth scrolling support ─────────────────────────────────── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+html.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+html.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+html.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+html.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
 /* ─── Smooth anchor scrolling ────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
