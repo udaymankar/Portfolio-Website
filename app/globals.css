@@ -732,13 +732,24 @@ html {
   text-decoration: none;
 }
 
-.masthead-name-transition {
+.masthead-name-parts {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.22em;
+  white-space: nowrap;
+}
+
+.masthead-name-part {
   display: inline-block;
   white-space: nowrap;
 }
 
+.masthead-name-parts .masthead-name-part:last-child {
+  margin-right: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .masthead-name-transition {
+  .masthead-name-part {
     transition: none !important;
   }
 }
