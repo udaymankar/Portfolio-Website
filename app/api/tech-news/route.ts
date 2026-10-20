@@ -43,7 +43,7 @@ function parseFeed(xml: string, source: string): Headline[] {
     const linkHref = block.match(/<(?:\w+:)?link\b[^>]*\bhref=["']([^"']+)["'][^>]*\/?\s*>/i)?.[1];
     const linkText = linkTag?.[2] ? decodeXml(linkTag[2]) : "";
     const url = linkHref || linkText || block.match(/<(?:\w+:)?link\b[^>]*>([^<]+)</i)?.[1]?.trim() || "";
-    const published = tagValue(block, "pubDate") || tagValue(block, "published") || tagValue(block, "updated") || tagValue(block, "dc:date");
+    const published = tagValue(block, "pubDate") || tagValue(block, "published") || tagValue(block, "updated") || tagValue(block, "date");
     return {
       title,
       url: decodeXml(url),
