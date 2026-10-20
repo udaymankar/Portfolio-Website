@@ -727,7 +727,7 @@ export default function Home() {
               </div>
 
               <div
-                className="mt-6 p-4 border"
+                className="mt-6 p-4 sm:p-5 border"
                 style={{
                   borderColor: "var(--burgundy)",
                   background: "#fff9f9",
@@ -737,14 +737,13 @@ export default function Home() {
                 <p
                   className="serif"
                   style={{
-                    fontSize: "0.95rem",
+                    fontSize: "clamp(1rem, 1.35vw, 1.1rem)",
                     color: "var(--ink-mid)",
-                    lineHeight: "1.5",
+                    lineHeight: "1.4",
                     fontStyle: "italic",
                   }}
                 >
-                  &ldquo;Building recruiter-friendly projects with clean code,
-                  practical features, and strong fundamentals.&rdquo;
+                  &ldquo;Building reliable software through clean code, thoughtful testing, and practical solutions.&rdquo;
                 </p>
               </div>
             </motion.aside>
