@@ -361,7 +361,8 @@ export default function Home() {
       }
     };
     refreshHeadlines();
-    const refreshTimer = window.setInterval(refreshHeadlines, 15 * 60 * 1000);
+    // Refresh live headlines every 6 hours; the server also caches feeds for this interval.
+    const refreshTimer = window.setInterval(refreshHeadlines, 6 * 60 * 60 * 1000);
     return () => {
       cancelled = true;
       window.clearInterval(refreshTimer);
