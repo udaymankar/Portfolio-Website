@@ -1341,14 +1341,22 @@ function ContactForm() {
     }
     setState("loading");
     try {
-      const res = await fetch("/api/contact", {
+      const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+      if (!accessKey) {
+        throw new Error("Contact form is not configured. Add NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY to the deployment environment.");
+      }
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          name: fields.name,
-          email: fields.email,
-          subject: fields.subject,
-          message: fields.message,
+          access_key: accessKey,
+          name: fields.name.trim(),
+          email: fields.email.trim(),
+          subject: fields.subject
+            ? `Portfolio Contact: ${fields.subject}`
+            : `Portfolio message from ${fields.name.trim()}`,
+          message: fields.message.trim(),
+          from_name: "The Uday Times Portfolio",
         }),
       });
       const json = await res.json().catch(() => ({}));
@@ -1356,6 +1364,7 @@ function ContactForm() {
         setState("success");
         setFields({ name: "", email: "", subject: "", message: "" });
       } else {
+        console.error("Web3Forms submission failed:", json);
         setState("error");
       }
     } catch {
