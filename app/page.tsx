@@ -671,11 +671,11 @@ export default function Home() {
                   }}
                 />
                 <a
-                  href="mailto:udaymankar9@gmail.com"
+                  href="mailto:udayamanakar2004@gmail.com"
                   className="hover:underline transition-all"
                   style={{ color: "var(--muted)" }}
                 >
-                  udaymankar9@gmail.com
+                  udayamanakar2004@gmail.com
                 </a>
               </motion.div>
 
@@ -1139,11 +1139,11 @@ export default function Home() {
                       label: "Email",
                       content: (
                         <a
-                          href="mailto:udaymankar9@gmail.com"
+                          href="mailto:udayamanakar2004@gmail.com"
                           className="contact-link"
                           style={{ color: "var(--ivory)", fontSize: "0.9rem" }}
                         >
-                          udaymankar9@gmail.com
+                          udayamanakar2004@gmail.com
                         </a>
                       ),
                     },
@@ -1576,10 +1576,10 @@ function ContactForm() {
           >
             Your message could not be sent through the form. Please email me directly at{" "}
             <a
-              href={`mailto:udaymankar9@gmail.com?subject=${encodeURIComponent(fields.subject || "Portfolio enquiry")}&body=${encodeURIComponent(`Name: ${fields.name}\nEmail: ${fields.email}\n\n${fields.message}`)}`}
+              href={`mailto:udayamanakar2004@gmail.com?subject=${encodeURIComponent(fields.subject || "Portfolio enquiry")}&body=${encodeURIComponent(`Name: ${fields.name}\nEmail: ${fields.email}\n\n${fields.message}`)}`}
               style={{ color: "#ff9b94", textDecoration: "underline", textUnderlineOffset: "3px" }}
             >
-              udaymankar9@gmail.com
+              udayamanakar2004@gmail.com
             </a>
             {" "}— your entered details will be pre-filled in the email draft.
           </p>
