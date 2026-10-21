@@ -65,16 +65,16 @@ export async function POST(req: NextRequest) {
           <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
             <tr>
               <td style="padding: 8px 0; font-size: 0.75rem; font-family: Inter, sans-serif; color: #7a7a7a; text-transform: uppercase; letter-spacing: 0.1em; width: 100px; vertical-align: top;">Name</td>
-              <td style="padding: 8px 0; font-size: 0.9rem; color: #111; vertical-align: top;">${name}</td>
+              <td style="padding: 8px 0; font-size: 0.9rem; color: #111; vertical-align: top;">${safeName}</td>
             </tr>
             <tr>
               <td style="padding: 8px 0; font-size: 0.75rem; font-family: Inter, sans-serif; color: #7a7a7a; text-transform: uppercase; letter-spacing: 0.1em; vertical-align: top;">Email</td>
-              <td style="padding: 8px 0; font-size: 0.9rem; color: #111; vertical-align: top;"><a href="mailto:${safeEmail}" style="color: #8b1a2e;">${email}</a></td>
+              <td style="padding: 8px 0; font-size: 0.9rem; color: #111; vertical-align: top;"><a href="mailto:${safeEmail}" style="color: #8b1a2e;">${safeEmail}</a></td>
             </tr>
             ${subject ? `
             <tr>
               <td style="padding: 8px 0; font-size: 0.75rem; font-family: Inter, sans-serif; color: #7a7a7a; text-transform: uppercase; letter-spacing: 0.1em; vertical-align: top;">Subject</td>
-              <td style="padding: 8px 0; font-size: 0.9rem; color: #111; vertical-align: top;">${subject}</td>
+              <td style="padding: 8px 0; font-size: 0.9rem; color: #111; vertical-align: top;">${safeSubject}</td>
             </tr>` : ""}
           </table>
 
@@ -86,7 +86,7 @@ export async function POST(req: NextRequest) {
           <hr style="border: none; border-top: 1px solid #d4cec5; margin: 32px 0 16px;" />
 
           <p style="font-size: 0.7rem; color: #7a7a7a; font-family: Inter, sans-serif; margin: 0;">
-            Reply directly to this email to respond to ${name}.
+            Reply directly to this email to respond to ${safeName}.
           </p>
         </div>
       `,
