@@ -1574,7 +1574,14 @@ function ContactForm() {
               background: "rgba(242,139,130,0.08)",
             }}
           >
-            Something went wrong. Please try again or email me directly at udaymankar9@gmail.com
+            Your message could not be sent through the form. Please email me directly at{" "}
+            <a
+              href={`mailto:udaymankar9@gmail.com?subject=${encodeURIComponent(fields.subject || "Portfolio enquiry")}&body=${encodeURIComponent(`Name: ${fields.name}\nEmail: ${fields.email}\n\n${fields.message}`)}`}
+              style={{ color: "#ff9b94", textDecoration: "underline", textUnderlineOffset: "3px" }}
+            >
+              udaymankar9@gmail.com
+            </a>
+            {" "}— your entered details will be pre-filled in the email draft.
           </p>
         )}
 
